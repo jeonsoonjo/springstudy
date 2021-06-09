@@ -1,0 +1,24 @@
+package ex01_xml;
+
+public class EngineerCalculator {
+
+	// property
+	private int num1;
+	private int num2;
+	private Calculator calculator;
+	
+	// constructor
+	public EngineerCalculator() {}
+	public EngineerCalculator(int num1, int num2, Calculator calculator) {
+		super();
+		this.num1 = num1;
+		this.num2 = num2;
+		this.calculator = calculator;
+	}
+	
+	// method
+	
+	
+}
+
+
