@@ -6,6 +6,12 @@ public class Person {
 	private String name;
 	private Car car;
 	
+	// method
+	public void info() {
+		System.out.println("이름: " + name);
+		car.info();
+	}
+	
 	// getter, setter
 	public String getName() {
 		return name;
@@ -18,12 +24,6 @@ public class Person {
 	}
 	public void setCar(Car car) {
 		this.car = car;
-	}
-	
-	// method
-	public void info() {
-		System.out.println("이름: " + name);
-		car.info();
 	}
 	
 }

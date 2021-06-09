@@ -1,0 +1,16 @@
+package quiz02;
+
+public class Calculator {
+
+	// property
+	
+	// constructor
+	
+	// method
+	public int add(int a, int b) {
+		
+	}
+	
+}
+
+

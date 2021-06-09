@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		Namespaces 탭에서 옵션 p를 선택하면
+		<property> 지정을 <bean> 태그의 속성으로 처리할 수 있다
+	-->
+	<!-- 
+		<bean id="객체명" class="클래스명" p:필드명="값" /> // 하위태그인 <property>를 따로 작성하지 않아도 된다
+		<bean id="객체명" class="클래스명" p:필드명="값" p:필드명-ref="객체" /> // 필드가 다른 객체인 경우 p:필드명-ref 로 작성
+	-->
+	
+	<!-- 
+		디폴트 생성자 + setter를 이용해 Bean 생성하기(p:property)
+		Engine engine = new Engine();
+		engine.setType("디젤");
+		engine.setCc(1950);
+		engine.setHp(235);
+		engine.setEfficiency(12.5);
+	-->
+	<!-- 엔진 -->
+	<bean id="engine" class="ex02_xml.Engine"
+		  p:type="디젤"
+		  p:cc="1950"
+		  p:hp="235"
+		  p:efficiency="12.5" />
+	
+	<!-- 자동차 -->
+	<bean id="car" class="ex02_xml.Car"
+		  p:model="소나타"
+		  p:model-ref="car" />
+
+
+
+
+
+
+</beans>
+
+

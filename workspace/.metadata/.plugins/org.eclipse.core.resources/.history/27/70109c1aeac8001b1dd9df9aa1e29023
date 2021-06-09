@@ -1,0 +1,34 @@
+package quiz02;
+
+public class MultiplicationTable {
+
+	// property
+	private int startDan;
+	private int endDan;
+	private int startNum;
+	private int endNum;
+	private Calculator calculator;
+	
+	// constructor
+	
+	// method
+	public void gugudan() {
+		for(int n=1; n<=9; n++) {
+			for(int dan=2; dan<=9; dan++) {
+				System.out.print(dan + "x" + n + "=" + (dan*n) + "\t");
+			}
+
+		startNum = 1;
+		endNum = 3;
+		for(int startDan=3; startDan<=5; startDan++) {
+			for(int endDan=1; endDan<=3; endDan++) {
+				System.out.println(startDan + "x" + endDan + "=" + (startDan * endDan));
+			}
+		}
+
+	}
+	
+	
+}
+
+
