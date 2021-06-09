@@ -13,6 +13,9 @@ public class SpringMainClass {
 		Student student = ctx.getBean("student", Student.class);
 		student.info();
 		
+		Exam exam = ctx.getBean("exam", Exam.class);
+		exam.info();
+		
 		ctx.close();
 
 	}

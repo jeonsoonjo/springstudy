@@ -12,7 +12,7 @@ public class SpringMainClass {
 		
 		Student student = ctx.getBean("student", Student.class);
 		student.info();
-		
+
 		ctx.close();
 
 	}
