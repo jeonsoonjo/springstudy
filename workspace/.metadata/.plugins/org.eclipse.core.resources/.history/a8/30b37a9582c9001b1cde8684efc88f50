@@ -1,0 +1,16 @@
+package ex04_xml;
+
+import java.util.List;
+
+public class Member {
+
+	// property
+	private String name;
+	private double height;
+	private double weight;
+	private BMICalculator bmiCalculator;
+	private List<String> services;
+	
+}
+
+

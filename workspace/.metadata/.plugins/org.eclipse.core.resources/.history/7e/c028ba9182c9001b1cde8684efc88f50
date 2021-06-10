@@ -1,0 +1,13 @@
+package ex04_xml;
+
+public class Member {
+
+	// property
+	private String name;
+	private double height;
+	private double weight;
+	private BMICalculator bmiCalculator;
+	
+}
+
+

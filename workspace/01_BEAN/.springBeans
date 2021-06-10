@@ -15,6 +15,7 @@
 		<config>src/main/resources/app-context3-2.xml</config>
 		<config>src/main/resources/app-context3-3.xml</config>
 		<config>src/main/resources/quiz03.xml</config>
+		<config>src/main/resources/app-context4.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
