@@ -1,0 +1,17 @@
+package ex05_java;
+
+import org.springframework.context.annotation.Configuration;
+
+/*
+ *	@Configuration 
+ * 
+*/
+
+@Configuration
+public class AppContext {
+
+	
+	
+}
+
+

@@ -1,0 +1,12 @@
+package ex05_java;
+
+public class Singer {
+
+	// field
+	private String name;
+	private Song song;
+	
+	
+}
+
+

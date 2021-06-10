@@ -1,0 +1,18 @@
+package ex05_java;
+
+import org.springframework.context.annotation.Configuration;
+
+/*
+ *	@Configuration
+	: 안녕. 나는 bean(객체)을 만들어 주는 java 클래스야
+ * 
+*/
+
+@Configuration
+public class AppContext {
+
+	
+	
+}
+
+

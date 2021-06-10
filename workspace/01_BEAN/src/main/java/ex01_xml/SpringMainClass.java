@@ -9,8 +9,7 @@ public class SpringMainClass {
 		
 		// spring bean configuration file에 정의된 <bean>을 생성하는 클래스
 		// GenericXmlApplicationContext
-		
-		// AbstractApplicationContext는 GenericXmlApplicationContext의 슈퍼클래스이다
+		// AbstractApplicationContext가 부모클래스이다
 		
 		String resourceLocations = "classpath:app-context1.xml";
 		AbstractApplicationContext ctx = new GenericXmlApplicationContext(resourceLocations);

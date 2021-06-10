@@ -1,0 +1,13 @@
+package ex05_java;
+
+public class Song {
+
+	// field
+	private String title;
+	private String genre;
+	
+	
+	
+}
+
+

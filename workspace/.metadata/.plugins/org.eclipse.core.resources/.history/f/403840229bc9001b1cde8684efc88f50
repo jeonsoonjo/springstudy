@@ -1,0 +1,16 @@
+package ex08_xml_into_java;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppContext {
+
+	@Bean
+	public Gun gun1() {
+		return new Gun("k2", 15);
+	}
+	
+}
+
+
