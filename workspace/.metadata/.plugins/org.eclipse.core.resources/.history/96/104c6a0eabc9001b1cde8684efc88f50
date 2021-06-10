@@ -1,0 +1,17 @@
+package quiz04;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppContext {
+
+	@Bean(name="lecture1")
+	public Lecture aaa() {
+		return new Lecture("자바", "김자바");
+	}
+	
+	
+}
+
+

@@ -1,0 +1,23 @@
+package ex09_scope;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class SpringMainClass {
+
+	public static void main(String[] args) {
+		
+		AbstractApplicationContext ctx = new GenericXmlApplicationContext("app-context9.xml");
+		
+		Person p1 = ctx.getBean("person1", Person.class);
+		Person p2 = ctx.getBean("person1", Person.class);
+		
+		System.out.println(p1 == p2); // scope="prototype"으로 해주었기 때문에 주소를 다르게 인식하여 false를 출력한다
+		
+		ctx.close();
+
+	}
+
+}
+
+

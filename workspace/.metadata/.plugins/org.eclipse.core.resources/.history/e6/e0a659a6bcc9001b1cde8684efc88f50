@@ -1,0 +1,12 @@
+package ex10_component;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppContext {
+
+	
+	
+}
+
+

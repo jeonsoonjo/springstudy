@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		문제
+		java_into_xml : java Bean -> xml 넣기
+	-->
+	
+	<!-- Lecture -->
+	<bean id="lecture1" class="quiz04.Lecture">
+		<property name="name" value="스프링" />
+		<property name="professor" value="이스프링" />
+	</bean>
+
+	<!-- Student -->
+	<bean id="student1" class="quiz04.Student">
+		<property name="name" value="성봉현" />
+		<property name="lecture" ref="lecture1" />
+	</bean>
+	
+</beans>
+
+

@@ -1,0 +1,11 @@
+package quiz04;
+
+public class Student {
+
+	// field
+	private String name;
+	private Lecture lecture;
+	
+}
+
+

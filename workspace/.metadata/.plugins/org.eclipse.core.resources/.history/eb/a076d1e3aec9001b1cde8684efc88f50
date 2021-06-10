@@ -1,0 +1,11 @@
+package quiz05;
+
+public class Person {
+
+	// field
+	private String name;
+	private String gender;
+	
+}
+
+
