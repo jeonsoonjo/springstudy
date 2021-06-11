@@ -1,6 +1,7 @@
 package ex01_inject;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /*
 	@Inject
@@ -39,16 +40,18 @@ public class SelectListCommand {
 				this.dao = dao;
 			}
 		*/
-		
-	
-		// 실전
+
 	
 		// field
 		private Dao dao;
 		
+		// constructor
+		public SelectListCommand() {}
+		
 		// setter
 		@Inject
-		public void setDao(Dao dao) {
+		@Named("dao1") //  <bean id="dao1"> 인 bean을 생성하라는 의미
+		public void setDao(Dao dao) { // app-context1.xml에서 <bean id="dao1">로 변경했다고해서 Inject한 매개변수명을 변경할 필요가 없다
 			this.dao = dao;
 		}
 		
