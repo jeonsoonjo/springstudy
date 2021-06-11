@@ -5,7 +5,20 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-06-10T19:00:00Z</updated>
+  <updated>2021-06-10T22:00:00Z</updated>
+  <entry>
+    <title>A Bootiful Podcast: Redgate technical lead for the Flyway team Mikiel Agutu on database migrations and continuous delivery</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/06/10/a-bootiful-podcast-redgate-technical-lead-for-the-flyway-team-mikiel-agutu-on-database-migrations-and-continuous-delivery" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-06-11:4467</id>
+    <updated>2021-06-10T22:00:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! In this installment, Josh Long (&lt;a href="https://twitter.com/starbuxman"&gt;@starbuxman&lt;/a&gt;) talks to Mikiel Agutu, technical lead for the Flyway team at Redgate software about database migrations and continuous delivery. &lt;/p&gt;
+&lt;iframe title="Redgate technical lead for the Flyway team Mikiel Agutu on database migrations and continuous delivery" allowtransparency="true" height="150" width="100%" style="border: none; min-width: min(100%, 430px);" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=bema8-105fc59-pb&amp;from=pb6admin&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;btn-skin=7"&gt;&lt;/iframe&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.5.1 is now available</title>
     <link rel="alternate" href="https://spring.io/blog/2021/06/10/spring-boot-2-5-1-is-now-available" />
@@ -747,89 +760,6 @@ Plus it includes upgrades to the latest dependencies, including recently release
     <content type="html">&lt;p&gt;On behalf of the team and everyone who contributed, I am pleased to announce that Spring Batch 4.2.7 and 4.3.3 have been released and are available now from Maven Central repository. These patch releases come with a number of bug fixes, improvements and dependency updates. You can find the complete change logs here: &lt;a href="https://github.com/spring-projects/spring-batch/releases/tag/4.2.7.RELEASE"&gt;4.2.7&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-batch/releases/tag/4.3.3"&gt;4.3.3&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;I would like to thank all contributors who had a role in these releases!&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://spring.io/projects/spring-batch"&gt;Spring Batch Home&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-batch"&gt;Source on GitHub&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-batch/docs/4.3.x/reference/pdf/spring-batch-reference.pdf"&gt;Reference Documentation&lt;/a&gt;&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Integration 5.5 goes GA</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/05/19/spring-integration-5-5-goes-ga" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Artem Bilan</name>
-    </author>
-    <id>tag:spring.io,2021-05-19:4448</id>
-    <updated>2021-05-19T14:29:55Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;Dear Spring community,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;On behalf of the team and all the contributors, it&amp;#8217;s my pleasure to announce a General Availability for Spring Integration &lt;code&gt;5.5&lt;/code&gt;, plus Spring Integration &lt;code&gt;5.4.7&lt;/code&gt; patch release.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Both versions can be obtained from Maven Central and it is recommended to upgrade your projects or just pull them transitively from respective latest Spring Boot patch versions!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code data-lang="groovy"&gt;compile 'org.springframework.integration:spring-integration-core:5.5.0'&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Spring Integration &lt;code&gt;5.4.7&lt;/code&gt; version contains mostly critical bug fixes and here is a highlight of notable changes made to Spring Integration &lt;code&gt;5.5&lt;/code&gt;, which, in general, is based on the community feedback to make the framework useful for end-user use-cases:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="ulist"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;A support for &lt;a href="https://github.com/spring-projects-experimental/spring-native"&gt;Spring Native&lt;/a&gt; compatibility - a lot of bean definition reflection has been reworked to the functional style, which improves a start up time even for regular JVM application!&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;FileAggregator&lt;/code&gt; component was introduced.
-See its JavaDocs for more info;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;All the persistent &lt;code&gt;MessageGroupStore&lt;/code&gt; implementations provide a &lt;code&gt;streamMessagesForGroup(Object groupId)&lt;/code&gt; contract based on the target database streaming API;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;integrationGlobalProperties&lt;/code&gt; custom bean now has to be an instance of &lt;code&gt;org.springframework.integration.context.IntegrationProperties&lt;/code&gt; instead of deprecated &lt;code&gt;java.util.Properties&lt;/code&gt; representation.
-All these Integration properties are now exposed as auto-configuration properties in Spring Boot;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;maxMessagesPerPoll == 0&lt;/code&gt; for an &lt;code&gt;AbstractPollingEndpoint&lt;/code&gt; is treated now as to skip calling the source;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A &lt;code&gt;@Reactive&lt;/code&gt; sub-annotation was introduced for annotation configuration to apply a &lt;code&gt;Function&amp;lt;? super Flux&amp;lt;Message&amp;lt;?&amp;gt;&amp;gt;, ? extends Publisher&amp;lt;Message&amp;lt;?&amp;gt;&amp;gt;&amp;gt; reactiveCustomizer&lt;/code&gt; for underlying consumer endpoint and make it as reactive independently of the input channel.
-Same behavior can be achieved in Java DSL via &lt;code&gt;ConsumerEndpointSpec.reactive()&lt;/code&gt; option;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;MongoDb message sources now have an optional &lt;code&gt;update&lt;/code&gt; to mark document which have just been pulled from the collection;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;WebSocket server endpoint-based channel adapters can now be registered (and removed) at runtime;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;MessageGroup&lt;/code&gt; abstraction has now a &lt;code&gt;condition&lt;/code&gt; property which can be consulted later on instead of the whole group iteration.
-The &lt;code&gt;AbstractCorrelatingMessageHandler&lt;/code&gt;, in turn, exposes a &lt;code&gt;BiFunction&amp;lt;Message&amp;lt;?&amp;gt;, String, String&amp;gt; conditionSupplier&lt;/code&gt; to extract possible group condition from the currently processed message;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;code&gt;DelayHandler&lt;/code&gt; now registers a &lt;code&gt;TransactionSynchronization&lt;/code&gt; to schedule a delay task only when current transaction is committed;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;a href="https://greenmail-mail-test.github.io/greenmail/"&gt;GreenMail&lt;/a&gt; library is used now for email integration tests.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;See &lt;a href="https://docs.spring.io/spring-integration/docs/5.5.0/reference/html/whats-new.html"&gt;What&amp;#8217;s New&lt;/a&gt; in documentation for more information.
-Be sure to consult the &lt;a href="https://github.com/spring-projects/spring-integration/wiki/Spring-Integration-5.4-to-5.5-Migration-Guide"&gt;Migration Guide&lt;/a&gt; since the upgrade may cause some breaking changes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Stay tuned for Spring Boot &lt;code&gt;2.5.0&lt;/code&gt; later today!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Cheers,&amp;#160;&lt;br&gt;
-Artem&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-integration/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/issues"&gt;GitHub Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-integration"&gt;Chat&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
