@@ -2,4 +2,6 @@
 <aop-reference-model>
 <aop-project name="01_BEAN"/>
 <aop-project name="02_DI"/>
+<aop-project name="04_MVC_BEAN"/>
+<aop-project name="03_MVC_OVERVIEW"/>
 </aop-reference-model>
