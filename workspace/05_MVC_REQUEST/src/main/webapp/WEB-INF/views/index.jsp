@@ -23,7 +23,11 @@
 	<hr>
 	<a href="/mvc03/f4/v01">folder04/view01.jsp로 이동</a><br>
 	<a href="/mvc03/f4/v02">folder04/view02.jsp로 이동</a><br>
-	
+	<hr>
+	<a href="/mvc03/f5/v01?name=브레드&age=50">folder05/view01.jsp로 이동</a><br>
+	<a href="/mvc03/f5/v02?name=브레드&age=50">folder05/view02.jsp로 이동</a><br>
+	<a href="/mvc03/f5/v03">folder05/view03.jsp로 이동</a><br>
+	<a href="/mvc03/f5/v04?name=브레드&age=50">folder05/view04.jsp로 이동</a><br>
 </body>
 </html>
 
