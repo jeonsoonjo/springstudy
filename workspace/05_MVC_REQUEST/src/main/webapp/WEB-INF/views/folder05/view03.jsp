@@ -10,8 +10,8 @@
 	
 	<h1>view03.jsp</h1>
 	<!-- index.jsp에서 보낸 파라미터 -->
-	${param.name}<br>
-	${param.age}<br>
+	${person.name}<br>
+	${person.age}<br>
 	
 	<!-- controller의 model이 저장한 속성 -->
 	${name}<br>

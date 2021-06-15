@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,7 @@ public class MyController6 {
 		1. HttpServletRequest
 		2. @RequestParam, null 처리
 		3. DTO
-		4. 
+		4. @ModelAttribute
 	*/
 	
 	// 1. HttpServletRequest 이용
@@ -37,7 +38,9 @@ public class MyController6 {
 	// @RequestParam(value="파라미터")
 	// @RequestParam("파라미터") : value 생략 가능
 	@RequestMapping("f5/v02")
-	public String b(@RequestParam("name") String name, @RequestParam("age") int age, Model model) {
+	public String b(@RequestParam("name") String name,
+					@RequestParam("age") int age,
+					Model model) {
 		model.addAttribute("name", name);
 		model.addAttribute("age", age);
 		
@@ -66,28 +69,19 @@ public class MyController6 {
 		return "folder05/view04";
 	}
 	
+	// 4. @ModelAttribute 이용(속성)
+	// 파라미터 값을 받아서 알아서  model에 저장한다(model선언을 안 해도 됨)
+	@RequestMapping("f5/v05")
+	public String e(@ModelAttribute(value="name") String name, // 파라미터 name을 String name에 저장한 뒤 model에 저장한다
+					@ModelAttribute("age") int age) {
+		return "folder05/view05";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 4-1. @ModelAttribute 이용(DTO)
+	@RequestMapping("f5/v06")
+	public String f(@ModelAttribute("person") Person person) {
+		return "folder05/view06";
+	}
 	
 }
 
