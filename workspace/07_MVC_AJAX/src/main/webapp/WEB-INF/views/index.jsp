@@ -10,6 +10,7 @@
 		$(document).ready(function(){
 			fn1();
 			fn2();
+			fn3();
 		})
 		
 		// 함수
@@ -47,6 +48,29 @@
 				})
 			})
 		}
+		
+		function fn3(){
+			$('#btn3').click(function(){
+				var obj = { // 서버로 보낼  json데이터(문자열로 보낸다)
+					"name": $('#name').val(),
+					"age": $('#age').val()
+			};
+			$.ajax({
+				url: 'v03',
+				type: 'post',
+				data: obj, // 서버로 보내는 json데이터, 파라미터가 아니다(@RequestParam 대신 @ReauestBody 애너테이션을 사용한다)
+				contentType: 'application/json', // 서버로 보내는 데이터의 타입
+				dataType: 'json',
+				success: function(responseData){
+					console.log(responseData);
+				}
+				error: function(xhr, text, error){
+					console.log(text + ", " + error);
+				}
+			})
+		})
+			
+	}
 	</script>
 </head>
 <body>
@@ -56,6 +80,7 @@
 		<input type="text" name="age" id="age" placeholder="나이"><br>
 		<input type="button" id="btn1" value="전송1">
 		<input type="button" id="btn2" value="전송2">
+		<input type="button" id="btn3" value="전송3">
 	</form>
 
 </body>

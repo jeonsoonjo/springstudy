@@ -1,6 +1,8 @@
 package com.koreait.mvc05.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +44,14 @@ public class MyController {
 		// return은 ViewResolver에 의해서 jsp로 처리가 되는데
 	}
 	
-	
+	// 3. json 받아서 json 반환하기
+	@RequestMapping(value="v03",
+					method=RequestMethod.GET,
+					produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public Person v03(@RequestBody Person person) {
+		return person;
+	}
 	
 	
 	
