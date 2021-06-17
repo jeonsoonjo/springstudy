@@ -5,9 +5,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.koreait.board02.command.DeleteBoardCommand;
+import com.koreait.board02.command.InsertBoardCommand;
+import com.koreait.board02.command.SelectBoardListCommand;
+import com.koreait.board02.command.SelectBoardViewCommand;
+import com.koreait.board02.command.UpdateBoardCommand;
+import com.koreait.board02.dao.BoardDAO;
+
 @Configuration
 public class BeanConfiguration {
 
+	// java bean 사용 추천
 	@Bean
 	public DriverManagerDataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -24,6 +32,32 @@ public class BeanConfiguration {
 		template.setDataSource(dataSource());
 		return template;
 	}
+	
+	@Bean
+	public BoardDAO boardDAO() {
+		return new BoardDAO();
+	}
+	@Bean
+	public SelectBoardListCommand listCommand() {
+		return new SelectBoardListCommand();
+	}
+	@Bean
+	public SelectBoardViewCommand viewCommand() {
+		return new SelectBoardViewCommand();
+	}
+	@Bean
+	public UpdateBoardCommand updateCommand() {
+		return new UpdateBoardCommand();
+	}
+	@Bean
+	public DeleteBoardCommand deleteCommand() {
+		return new DeleteBoardCommand();
+	}
+	@Bean
+	public InsertBoardCommand insertCommand() {
+		return new InsertBoardCommand();
+	}
+	
 	
 }
 

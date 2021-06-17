@@ -14,13 +14,20 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
-
+	
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<!-- 5.1.4 ver maven 복사 후, 바로 밑에 spring ver 복사 후 붙여넣기 함 -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2.2</version>
 		</dependency>
 
 		<!-- Spring -->

@@ -14,7 +14,6 @@
 			})
 		})
 	</script>
-	<link rel="stylesheet" href="resources/asstes/css/style.css">
 </head>
 <body>
 
