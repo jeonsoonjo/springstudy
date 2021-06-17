@@ -7,7 +7,20 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
-	
+		$(document).ready(function(){
+			$('#update_page_btn').click(function(){
+				$('#f').attr('action', 'updateBoardPage.do');
+				$('#f').submit();
+			})
+			$('#delete_btn').click(function(){
+				if (confirm('삭제할까요?')) {
+					location.href = 'deleteBoard.do?no=${board.no}';
+				}
+			})
+			$('#list_btn').click(function(){
+				location.href = 'selectBoardList.do';
+			})
+		})
 	</script>
 </head>
 <body>

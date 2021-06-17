@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,42 @@ import com.koreait.board01.command.InsertBoardCommand;
 import com.koreait.board01.command.UpdateBoardCommand;
 import com.koreait.board01.dto.Board;
 
-// @Controller
-public class BoardController {
+@Controller
+public class BoardController2 {
 
 	// field
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	private BoardCommand command;
+	private static final Logger logger = LoggerFactory.getLogger(BoardController2.class);
+	private BoardListCommand boardListCommand;
+	private BoardViewCommand boardViewCommand;
+	private InsertBoardCommand insertBoardCommand;
+	private DeleteBoardCommand deleteBoardCommand;
+	private UpdateBoardCommand updateBoardCommand;
+	
+	// root-context.xml 정의된 bean 주입
+	/*
+		1. 필드 이용하기(하나씩 모두 적용)
+		
+		@Autowired
+		private BoardListCommand boardListCommand;
+		@Autowired
+		private BoardViewCommand boardViewCommand;
+		...
+	*/
+	/*
+		2. setter 형태의 method
+	*/
+	@Autowired
+	public void setCommand(BoardListCommand boardListCommand,
+						   BoardViewCommand boardViewCommand,
+						   InsertBoardCommand insertBoardCommand,
+						   DeleteBoardCommand deleteBoardCommand,
+						   UpdateBoardCommand updateBoardCommand) {
+		this.boardListCommand = boardListCommand;
+		this.boardViewCommand = boardViewCommand;
+		this.insertBoardCommand = insertBoardCommand;
+		this.deleteBoardCommand = deleteBoardCommand;
+		this.updateBoardCommand = updateBoardCommand;
+	}
 	
 	// method
 	@GetMapping(value="/") // @RequestMapping(value="/", method=RequestMethod.GET)
@@ -35,9 +66,8 @@ public class BoardController {
 	@GetMapping(value="selectBoardList.do")
 	public String selectBoardList(Model model) { // execute(model)를 해줘야 하기에 매개변수로 model를 사용해야 한다
 		logger.info("selectBoardList() 호출");
-		command = new BoardListCommand();
-		command.execute(model);
-		return "board/list"; // board/list.jsp로 이동
+		boardListCommand.execute(model);
+		return "board/list";
 	}
 	
 	@GetMapping(value="insertBoardPage.do")
@@ -53,9 +83,8 @@ public class BoardController {
 		// 모든 Command에는 model만 전달할 수 있다
 		// 따라서, Command에 전달할 데이터들은 모두 model에 저장해야 한다
 		model.addAttribute("request", request);
-		command = new InsertBoardCommand();
-		command.execute(model);
-		return "redirect:selectBoardList.do"; // 게시글 작성 후 목록 보기로 이동(redirect:매핑)
+		insertBoardCommand.execute(model);
+		return "selectBoardList.do"; // 게시글 작성 후 목록 보기로 이동(redirect:매핑)
 	}
 	
 	@GetMapping(value="selectBoardByNo.do")
@@ -63,8 +92,7 @@ public class BoardController {
 								  Model model) {
 		logger.info("selectBoardByNo() 호출");
 		model.addAttribute("no", no);
-		command = new BoardViewCommand();
-		command.execute(model);
+		boardViewCommand.execute(model);
 		return "board/view";
 	}
 	
@@ -79,8 +107,7 @@ public class BoardController {
 							  Model model) {
 		logger.info("updateBoard() 호출");
 		model.addAttribute("board", board);
-		command = new UpdateBoardCommand();
-		command.execute(model);
+		updateBoardCommand.execute(model);
 		return "redirect:selectBoardByNo.do?no=" + board.getNo();
 	}
 	
@@ -89,10 +116,10 @@ public class BoardController {
 							  Model model) {
 		logger.info("deleteBoard() 호출");
 		model.addAttribute("no", no);
-		command = new DeleteBoardCommand();
-		command.execute(model);
+		deleteBoardCommand.execute(model);
 		return "redirect:selectBoardList.do";
 	}
+	
 	
 }
 

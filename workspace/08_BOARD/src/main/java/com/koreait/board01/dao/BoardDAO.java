@@ -92,26 +92,62 @@ public class BoardDAO {
 		}
 	}
 	
+	// 3. 게시글 반환
+	public Board selectBoardByNo(long no) {
+		Board board = null;
+		try {
+			con = dataSource.getConnection();
+			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BOARD WHERE NO=?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, no);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				board = new Board();
+				board.setNo(rs.getLong(1));
+				board.setWriter(rs.getString(2));
+				board.setTitle(rs.getString(3));
+				board.setContent(rs.getString(4));
+				board.setPostdate(rs.getDate(5));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, rs);
+		}
+		return board;
+	}
 	
+	// 3. 게시글 수정
+	public void updateBoard(Board board) {
+		try {
+			con = dataSource.getConnection();
+			sql = "UPDATE BOARD SET TITLE=?, CONTENT=? WHERE NO=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setLong(3, board.getNo());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 4. 게시글 삭제
+	public void deleteBoard(long no) {
+		try {
+			con = dataSource.getConnection();
+			sql = "DELETE FROM BOARD WHERE NO=?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, no);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps, null);
+		}
+	}
 	
 }
 
