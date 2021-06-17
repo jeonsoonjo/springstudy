@@ -14,6 +14,7 @@ public class UpdateBoardCommand implements BoardCommand {
 		
 		Map<String, Object> map = model.asMap();
 		Board board = (Board)map.get("board");
+		
 		BoardDAO.getInstance().updateBoard(board);
 
 	}

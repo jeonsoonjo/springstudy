@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koreait.board01.command.BoardListCommand;
@@ -100,13 +101,13 @@ public class BoardController2 {
 		return "board/view";
 	}
 	
-	@GetMapping(value="updateBoardPage.do")
+	@PostMapping(value="updateBoardPage.do")
 	public String updateBoardPage(@ModelAttribute Board board) {
 		logger.info("updateBoardPage() 호출");
 		return "board/update";
 	}
 	
-	@GetMapping(value="updateBoard.do")
+	@PostMapping(value="updateBoard.do")
 	public String updateBoard(Board board,
 							  Model model) {
 		logger.info("updateBoard() 호출");

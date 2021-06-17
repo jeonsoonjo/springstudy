@@ -23,6 +23,15 @@
 	
 	<context:component-scan base-package="com.koreait.board02" />
 	
+	<!-- BoardDAO -->
+	<!-- BoardDAO에서 singleton 작업을 따로 하지 않아도 된다 -->
+	<beans:bean id="boardDAO" class="com.koreait.board02.dao.BoardDAO" />
 	
+	<!-- command -->
+	<beans:bean id="selectBoardListCommand" class="com.koreait.board02.command.SelectBoardListCommand" />
+	<beans:bean id="selectBoardViewCommand" class="com.koreait.board02.command.SelectBoardViewCommand" />
+	<beans:bean id="updateBoardCommand" class="com.koreait.board02.command.UpdateBoardCommand" />
+	<beans:bean id="deleteBoardCommand" class="com.koreait.board02.command.DeleteBoardCommand" />
+	<beans:bean id="insertBoardCommand" class="com.koreait.board02.command.InsertBoardCommand" />
 	
 </beans:beans>
