@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script>
-		setTimeout({
+		setTimeout(function(){
 			location.href = 'selectBoardList.do';
 		}, 3000);
 	</script>

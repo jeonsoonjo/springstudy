@@ -4,14 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.koreait.board01.command.BoardCommand;
 import com.koreait.board01.command.BoardListCommand;
 import com.koreait.board01.command.BoardViewCommand;
 import com.koreait.board01.command.DeleteBoardCommand;
@@ -19,16 +16,8 @@ import com.koreait.board01.command.InsertBoardCommand;
 import com.koreait.board01.command.UpdateBoardCommand;
 import com.koreait.board01.dto.Board;
 
-@Controller
+// @Controller
 public class BoardController2 {
-
-	// field
-	private static final Logger logger = LoggerFactory.getLogger(BoardController2.class);
-	private BoardListCommand boardListCommand;
-	private BoardViewCommand boardViewCommand;
-	private InsertBoardCommand insertBoardCommand;
-	private DeleteBoardCommand deleteBoardCommand;
-	private UpdateBoardCommand updateBoardCommand;
 	
 	// root-context.xml 정의된 bean 주입
 	/*
@@ -42,19 +31,34 @@ public class BoardController2 {
 	*/
 	/*
 		2. setter 형태의 method
+		private BoardListCommand boardListCommand;
+		private BoardViewCommand boardViewCommand;
+		private InsertBoardCommand insertBoardCommand;
+		private DeleteBoardCommand deleteBoardCommand;
+		private UpdateBoardCommand updateBoardCommand;
 	*/
-	@Autowired
-	public void setCommand(BoardListCommand boardListCommand,
-						   BoardViewCommand boardViewCommand,
-						   InsertBoardCommand insertBoardCommand,
-						   DeleteBoardCommand deleteBoardCommand,
-						   UpdateBoardCommand updateBoardCommand) {
-		this.boardListCommand = boardListCommand;
-		this.boardViewCommand = boardViewCommand;
-		this.insertBoardCommand = insertBoardCommand;
-		this.deleteBoardCommand = deleteBoardCommand;
-		this.updateBoardCommand = updateBoardCommand;
-	}
+	/*
+		@Autowired
+		
+		public void setCommand(BoardListCommand boardListCommand,  -- 매개변수로 자동 주입
+							   BoardViewCommand boardViewCommand,
+							   InsertBoardCommand insertBoardCommand,
+							   DeleteBoardCommand deleteBoardCommand,
+							   UpdateBoardCommand updateBoardCommand) {
+			this.boardListCommand = boardListCommand;
+			this.boardViewCommand = boardViewCommand;
+			this.insertBoardCommand = insertBoardCommand;
+			this.deleteBoardCommand = deleteBoardCommand;
+			this.updateBoardCommand = updateBoardCommand;
+		}
+	*/
+	// field
+	private static final Logger logger = LoggerFactory.getLogger(BoardController2.class);
+	private BoardListCommand boardListCommand;
+	private BoardViewCommand boardViewCommand;
+	private InsertBoardCommand insertBoardCommand;
+	private DeleteBoardCommand deleteBoardCommand;
+	private UpdateBoardCommand updateBoardCommand;
 	
 	// method
 	@GetMapping(value="/") // @RequestMapping(value="/", method=RequestMethod.GET)
@@ -67,13 +71,13 @@ public class BoardController2 {
 	public String selectBoardList(Model model) { // execute(model)를 해줘야 하기에 매개변수로 model를 사용해야 한다
 		logger.info("selectBoardList() 호출");
 		boardListCommand.execute(model);
-		return "board/list";
+		return "board/list"; // board/list.jsp로 이동
 	}
 	
 	@GetMapping(value="insertBoardPage.do")
 	public String insertBoardPage() {
 		logger.info("insertBoardPage() 호출");
-		return "board/insert";
+		return "board/insert"; // board/insert.jsp로 이동
 	}
 	
 	@GetMapping(value="insertBoard.do")

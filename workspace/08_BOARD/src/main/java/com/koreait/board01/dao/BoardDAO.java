@@ -79,7 +79,7 @@ public class BoardDAO {
 	public void insertBoard(Board board) {
 		try {
 			con = dataSource.getConnection();
-			sql = "INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)";
+			sql = "INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, ?, ?, ?, SYSDATE)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getWriter());
 			ps.setString(2, board.getTitle());
@@ -97,11 +97,11 @@ public class BoardDAO {
 		Board board = null;
 		try {
 			con = dataSource.getConnection();
-			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BOARD WHERE NO=?";
+			sql = "SELECT NO, WRITER, TITLE, CONTENT, POSTDATE FROM BOARD WHERE NO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setLong(1, no);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				board = new Board();
 				board.setNo(rs.getLong(1));
 				board.setWriter(rs.getString(2));
@@ -121,7 +121,7 @@ public class BoardDAO {
 	public void updateBoard(Board board) {
 		try {
 			con = dataSource.getConnection();
-			sql = "UPDATE BOARD SET TITLE=?, CONTENT=? WHERE NO=?";
+			sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ? WHERE NO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, board.getTitle());
 			ps.setString(2, board.getContent());
@@ -138,7 +138,7 @@ public class BoardDAO {
 	public void deleteBoard(long no) {
 		try {
 			con = dataSource.getConnection();
-			sql = "DELETE FROM BOARD WHERE NO=?";
+			sql = "DELETE FROM BOARD WHERE NO = ?";
 			ps = con.prepareStatement(sql);
 			ps.setLong(1, no);
 			ps.executeUpdate();
