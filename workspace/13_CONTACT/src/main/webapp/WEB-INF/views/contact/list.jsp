@@ -29,7 +29,7 @@
 				<c:forEach var="contact" items="${list}">
 					<tr>
 						<td>${contact.no}</td>
-						<td><a href="selectContactView.do?no=${contact.no}">${contact.name}</a></td>
+						<td><a href="selectContactByNo.do?no=${contact.no}">${contact.name}</a></td>
 						<td>${contact.tel}</td>
 						<td>${contact.addr}</td>
 						<td>${contact.email}</td>

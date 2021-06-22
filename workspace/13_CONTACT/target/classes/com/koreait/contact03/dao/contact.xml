@@ -5,6 +5,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.contact03.dao.ContactDAO">
 
+	<!-- ContactDAO method == mapper id -->
+	
+	<select id="selectContactList" resultType="com.koreait.contact03.dto.Contact">
+		SELECT NO, NAME, TEL, ADDR, EMAIL, NOTE
+		  FROM CONTACT
+		 ORDER BY NO DESC
+	</select>
+	
+	<select id="selectContactByNo" resultType="com.koreait.contact03.dto.Contact">
+		SELECT NO, NAME, TEL, ADDR, EMAIL, NOTE
+		  FROM CONTACT
+		 WHERE NO = #{no}
+	</select>
+
+	<!-- insert, update, delete는 resultType 작성 안 함 -->
+	<insert id="insertContact">
+		INSERT INTO CONTACT
+		VALUES (CONTACT_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+
+	
+
+
+
+
+
+
 
 
 

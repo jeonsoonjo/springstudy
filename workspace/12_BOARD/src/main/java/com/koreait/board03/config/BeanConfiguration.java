@@ -37,6 +37,7 @@ public class BeanConfiguration {
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
+	
 	@Bean
 	public SelectBoardListCommand listCommand() {
 		return new SelectBoardListCommand();
@@ -59,3 +60,4 @@ public class BeanConfiguration {
 	}
 	
 }
+

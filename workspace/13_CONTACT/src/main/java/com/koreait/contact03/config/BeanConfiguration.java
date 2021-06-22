@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.koreait.contact03.command.InsertContactCommand;
+import com.koreait.contact03.command.SelectContactListCommand;
+import com.koreait.contact03.command.SelectContactViewCommand;
+
 @Configuration
 public class BeanConfiguration {
 
@@ -31,9 +35,19 @@ public class BeanConfiguration {
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
-	
-	
-	
+
+	@Bean
+	public SelectContactListCommand listCommand() {
+		return new SelectContactListCommand();
+	}
+	@Bean
+	public SelectContactViewCommand viewCommand() {
+		return new SelectContactViewCommand();
+	}
+	@Bean
+	public InsertContactCommand insertCommand() {
+		return new InsertContactCommand();
+	}
 	
 	
 	

@@ -30,7 +30,7 @@
 
 	<h3>연락처 등록</h3>
 	
-	<form id="f" method="post">
+	<form id="f">
 		이름*<br>
 		<input type="text" name="name" id="name"><br><br>
 		전화*<br>
