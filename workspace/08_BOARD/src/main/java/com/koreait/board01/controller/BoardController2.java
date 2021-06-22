@@ -89,7 +89,7 @@ public class BoardController2 {
 		// 따라서, Command에 전달할 데이터들은 모두 model에 저장해야 한다
 		model.addAttribute("request", request);
 		insertBoardCommand.execute(model);
-		return "selectBoardList.do"; // 게시글 작성 후 목록 보기로 이동(redirect:매핑)
+		return "redirect:selectBoardList.do"; // 게시글 작성 후 목록 보기로 이동(redirect:매핑)
 	}
 	
 	@GetMapping(value="selectBoardByNo.do")
