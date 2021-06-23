@@ -17,6 +17,7 @@ public class SelectBoardViewCommand implements BoardCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
 		long no = Long.parseLong(request.getParameter("no"));
 		
 		BoardDAO boardDAO = sqlSession.getMapper(BoardDAO.class);

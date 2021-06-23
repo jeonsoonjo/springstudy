@@ -30,7 +30,6 @@
 		첨부 이미지<br>
 		<img alt="${board.filename}" src="resources/archive/${board.filename}" style="width: 300px;">
 		
-		
 	</form>
 </body>
 </html>
