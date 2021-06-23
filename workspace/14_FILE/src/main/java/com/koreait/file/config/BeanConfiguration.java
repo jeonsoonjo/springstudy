@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import com.koreait.file.command.SelectBoardListCommand;
+
 @Configuration
 public class BeanConfiguration {
 
@@ -32,7 +34,10 @@ public class BeanConfiguration {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 
-	
+	@Bean
+	public SelectBoardListCommand listCommand() {
+		return new SelectBoardListCommand();
+	}
 	
 	
 	

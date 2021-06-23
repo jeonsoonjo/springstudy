@@ -20,7 +20,7 @@
 		<input type="text" name="content"><br><br>
 		
 		첨부<br>
-		<input type="file" name="files" multiple><br><br>
+		<input type="file" name="files" multiple><br><br> <!-- multiple : 다중 첨부 가능 -->
 		
 		<button>저장하기</button>
 	</form>
