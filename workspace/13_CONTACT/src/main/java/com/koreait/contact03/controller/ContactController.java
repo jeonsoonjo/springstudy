@@ -53,10 +53,11 @@ public class ContactController {
 		return "contact/view";
 	}
 	
-	@GetMapping(value="insertContactPage.do")
+	@GetMapping(value="insertContactPage.do") // 단순이동
 	public String insertContactPage() {
 		return "contact/insert";
 	}
+	
 	@GetMapping(value="insertContact.do")
 	public String insertContact(HttpServletRequest request,
 								Model model) {

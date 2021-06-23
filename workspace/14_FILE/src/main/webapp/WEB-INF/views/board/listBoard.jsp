@@ -11,6 +11,7 @@
 <body>
 
 	<h1>게시글 목록 보기</h1>
+	<a href="insertBoardPage.do">새 글 작성하기</a><br><br>
 	<table border="1">
 		<thead>
 			<tr>
@@ -36,7 +37,7 @@
 						<td>${board.postdate}</td>
 						<td>
 							<c:if test="${not empty board.filename}">
-								<i class="fas fa-paperclip"></i>
+								<a href="download.do?filename=${board.filename}"><i class="fas fa-paperclip"></i></a>
 							</c:if>
 						</td>
 					</tr>

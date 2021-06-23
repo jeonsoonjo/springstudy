@@ -18,7 +18,7 @@ public class InsertContactCommand implements ContactCommand {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		// NAME, TEL, ADDR, EMAIL, NOTE
+		// NAME, TEL, ADDR, EMAIL, NOTE 파라미터 처리
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel");
 		String addr = request.getParameter("addr");

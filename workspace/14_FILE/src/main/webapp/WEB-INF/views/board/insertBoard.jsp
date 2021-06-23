@@ -9,7 +9,7 @@
 <body>
 
 	<h1>게시글 작성 화면</h1>
-	<form action="insertBoard.do" method="post" enctype="multipart/form-data">
+	<form action="insertBoard.do" method="post" enctype="multipart/form-data"> <!-- 첨부파일이 있을 땐 multipart -->
 		작성자<br>
 		<input type="text" name="writer"><br><br>
 		
