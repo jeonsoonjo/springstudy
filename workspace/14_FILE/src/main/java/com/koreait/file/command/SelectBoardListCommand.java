@@ -8,9 +8,9 @@ import com.koreait.file.dao.BoardDAO;
 public class SelectBoardListCommand implements BoardCommand {
 
 	@Override
-	public void execute(SqlSession sqlsession, Model model) {
+	public void execute(SqlSession sqlSession, Model model) {
 		
-		BoardDAO boardDAO = sqlsession.getMapper(BoardDAO.class);
+		BoardDAO boardDAO = sqlSession.getMapper(BoardDAO.class);
 		model.addAttribute("list", boardDAO.selectBoardList());
 
 	}

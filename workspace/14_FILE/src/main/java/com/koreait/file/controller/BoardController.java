@@ -15,6 +15,8 @@ import com.koreait.file.command.DownloadCommand;
 import com.koreait.file.command.InsertBoardCommand;
 import com.koreait.file.command.SelectBoardListCommand;
 
+import selectBoardByNo.SelectBoardViewCommand;
+
 @Controller
 public class BoardController {
 
@@ -23,18 +25,21 @@ public class BoardController {
 	private SelectBoardListCommand selectBoardListCommand;
 	private InsertBoardCommand insertBoardCommand;
 	private DownloadCommand downloadCommand;
+	private SelectBoardViewCommand selectBoardViewCommand;
 	
 	// constructor
 	@Autowired
 	public BoardController(SqlSession sqlSession,
 						   SelectBoardListCommand selectBoardListCommand,
 						   InsertBoardCommand insertBoardCommand,
-						   DownloadCommand downloadCommand) {
+						   DownloadCommand downloadCommand,
+						   SelectBoardViewCommand selectBoardViewCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.selectBoardListCommand = selectBoardListCommand;
 		this.insertBoardCommand = insertBoardCommand;
 		this.downloadCommand = downloadCommand;
+		this.selectBoardViewCommand = selectBoardViewCommand;
 	}
 	
 	// method
@@ -71,8 +76,13 @@ public class BoardController {
 		downloadCommand.execute(model);
 	}
 	
-
-	
+	@GetMapping(value="selectBoardByNo.do")
+	public String selectBoardByNo(HttpServletRequest request,
+								  Model model) {
+		model.addAttribute("request", request);
+		selectBoardViewCommand.execute(sqlSession, model);
+		return "board/viewBoard";
+	}
 	
 	
 	

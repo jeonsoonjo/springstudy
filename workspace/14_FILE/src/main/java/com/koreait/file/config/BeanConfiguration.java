@@ -13,6 +13,8 @@ import com.koreait.file.command.DownloadCommand;
 import com.koreait.file.command.InsertBoardCommand;
 import com.koreait.file.command.SelectBoardListCommand;
 
+import selectBoardByNo.SelectBoardViewCommand;
+
 @Configuration
 public class BeanConfiguration {
 
@@ -61,7 +63,10 @@ public class BeanConfiguration {
 		return new DownloadCommand();
 	}
 	
-	
+	@Bean
+	public SelectBoardViewCommand viewCommand() {
+		return new SelectBoardViewCommand();
+	}
 	
 	
 	

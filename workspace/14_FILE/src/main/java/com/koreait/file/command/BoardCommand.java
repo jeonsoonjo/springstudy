@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 
 public interface BoardCommand {
 
-	public void execute(SqlSession session, Model model);
+	public void execute(SqlSession sqlSession, Model model);
 	
 }
 
