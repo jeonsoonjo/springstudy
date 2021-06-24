@@ -1,4 +1,4 @@
-package selectBoardByNo;
+package com.koreait.file.command;
 
 import java.util.Map;
 
@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.koreait.file.command.BoardCommand;
 import com.koreait.file.dao.BoardDAO;
 
 public class SelectBoardViewCommand implements BoardCommand {
