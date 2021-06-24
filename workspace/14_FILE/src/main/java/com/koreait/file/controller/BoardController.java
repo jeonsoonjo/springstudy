@@ -10,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
+import com.koreait.file.command.DeleteBoardCommand;
 import com.koreait.file.command.DownloadCommand;
 import com.koreait.file.command.InsertBoardCommand;
 import com.koreait.file.command.SelectBoardListCommand;
 import com.koreait.file.command.SelectBoardViewCommand;
+import com.koreait.file.command.UpdateBoardCommand;
 
 @Controller
 public class BoardController {
@@ -26,6 +27,8 @@ public class BoardController {
 	private InsertBoardCommand insertBoardCommand;
 	private DownloadCommand downloadCommand;
 	private SelectBoardViewCommand selectBoardViewCommand;
+	private UpdateBoardCommand updateBoardCommand;
+	private DeleteBoardCommand deleteBoardCommand;
 	
 	// constructor
 	@Autowired
@@ -33,13 +36,17 @@ public class BoardController {
 						   SelectBoardListCommand selectBoardListCommand,
 						   InsertBoardCommand insertBoardCommand,
 						   DownloadCommand downloadCommand,
-						   SelectBoardViewCommand selectBoardViewCommand) {
+						   SelectBoardViewCommand selectBoardViewCommand,
+						   UpdateBoardCommand updateBoardCommand,
+						   DeleteBoardCommand deleteBoardCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.selectBoardListCommand = selectBoardListCommand;
 		this.insertBoardCommand = insertBoardCommand;
 		this.downloadCommand = downloadCommand;
 		this.selectBoardViewCommand = selectBoardViewCommand;
+		this.updateBoardCommand = updateBoardCommand;
+		this.deleteBoardCommand = deleteBoardCommand;
 	}
 	
 	// method
@@ -88,24 +95,17 @@ public class BoardController {
 	public String updateBoard(MultipartHttpServletRequest multipartRequest,
 							  Model model) {
 		model.addAttribute("multipartRequest", multipartRequest);
-		
+		updateBoardCommand.execute(sqlSession, model);
 		return "redirect:selectBoardByNo.do?no=" + multipartRequest.getParameter("no");
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@PostMapping(value="deleteBoard.do")
+	public String deleteBoard(MultipartHttpServletRequest multipartRequest,
+							  Model model) {
+		model.addAttribute("multipartRequest", multipartRequest);
+		deleteBoardCommand.execute(sqlSession, model);
+		return "redirect:selectBoardList.do";
+	}
 	
 }
 

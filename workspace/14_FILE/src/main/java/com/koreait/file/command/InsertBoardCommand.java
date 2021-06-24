@@ -1,6 +1,8 @@
 package com.koreait.file.command;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +74,13 @@ public class InsertBoardCommand implements BoardCommand {
 				try {
 					file.transferTo(attach); // 저장된 파일명 attach에 보낸다는 의미, try-catch 필요
 				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				// DB에 넣는 파일명을 인코딩 처리
+				try {
+					uploadFilename = URLEncoder.encode(uploadFilename, "utf-8");
+				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
 				

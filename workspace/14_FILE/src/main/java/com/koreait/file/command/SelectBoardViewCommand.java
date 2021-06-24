@@ -21,14 +21,6 @@ public class SelectBoardViewCommand implements BoardCommand {
 		
 		BoardDAO boardDAO = sqlSession.getMapper(BoardDAO.class);
 		model.addAttribute("board", boardDAO.selectBoardByNo(no));
-		
-		
-		
-		
-		
-		
-		
-		
 
 	}
 

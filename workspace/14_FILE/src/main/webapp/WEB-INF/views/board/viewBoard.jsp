@@ -12,6 +12,7 @@
 		$(function(){
 			fn_update();
 			fn_delete();
+			fn_list();
 		});
 		
 		function fn_update(){
@@ -29,24 +30,25 @@
 				}
 			});
 		}
+		
+		function fn_list(){
+			$('#list_btn').click(function(){
+				location.href = 'selectBoardList.do';
+			});
+		}
 	</script>
 </head>
 <body>
-
-	<%
-		Board board = (Board)request.getAttribute("board"); // model이 전달한 속성은 request이다
-		String encFilename = URLEncoder.encode(board.getFilename(), "utf-8");
-		pageContext.setAttribute("encFilename", encFilename);
-	%>
 	
 	<h1>게시글 보기 화면</h1>
 	<form id="f" method="post" enctype="multipart/form-data">
 	
 		<input type="button" value="수정하기" id="update_btn">
-		<input type="button" value="삭제하기" id="delete_btn"><br><br>
+		<input type="button" value="삭제하기" id="delete_btn">
+		<input type="button" value="목록보기" id="list_btn"><br><br>
 		 
 		<input type="hidden" name="no" value="${board.no}">
-		<input type="hidden" name="filename" value="${filename}"> <!--서버에 첨부된 첨부파일명  -->
+		<input type="hidden" name="filename1" value="${filename}"> <!--서버에 첨부된 첨부파일명  -->
 		 
 		작성자<br>
 		${board.writer}<br><br>
