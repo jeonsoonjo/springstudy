@@ -60,7 +60,9 @@
 			<input type="password" name="pw" id="pw" placeholder="Password"><br><br>
 			<button>로그인</button>
 		</form><br>
-		<a href="joinPage.do">회원가입</a>
+		<a href="joinPage.do">회원가입</a>&nbsp;&nbsp;&nbsp;
+		<a href="findIdPage.do">아이디 찾기</a>&nbsp;&nbsp;&nbsp;
+		<a href="findPwPage.do">비밀번호 찾기</a>
 	</c:if>
 	
 </body>

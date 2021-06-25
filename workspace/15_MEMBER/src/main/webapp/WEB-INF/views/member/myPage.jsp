@@ -9,6 +9,7 @@
 	<script>
 		$(document).ready(function(){
 			fn_update();
+			fn_presentPwCheck();
 			fn_updatePw();
 		})
 		
@@ -25,28 +26,29 @@
 		// 현재 비밀번호 확인
 		var presentPwPass = false;
 		function fn_presentPwCheck(){
-			var obj = { // 비밀번호 객체 생성
-					pw: $('#pw0').val()
-			};
-			$.ajax({
-				url: 'presentPwCheck.do',
-				type: 'post',
-				contentType: 'application/json',
-				data: JSON.stringify(obj),
-				dataType: 'json',
-				success: function(resultMap){
-					if(resultMap.isCorrect){
-						presentPwPass = true;
-					} else{
-						presentPwPass = false;
+			$('#pw0').keyup(function(){
+				var obj = { // 비밀번호 객체 생성
+						pw: $('#pw0').val()
+				};
+				$.ajax({
+					url: 'presentPwCheck.do',
+					type: 'post',
+					contentType: 'application/json',
+					data: JSON.stringify(obj),
+					dataType: 'json',
+					success: function(resultMap){
+						if(resultMap.isCorrect){
+							presentPwPass = true;
+						} else{
+							presentPwPass = false;
+						}
 					}
-				}
+				});
 			});
 		}
 		
 		// 비밀번호 변경
 		function fn_updatePw(){
-			fn_presentPwCheck();
 			$('#pw_btn').click(function(){
 				if(!presentPwPass){
 					alert('현재 비밀번호가 일치하지 않습니다. 확인해주세요.');
@@ -57,7 +59,7 @@
 					$('#pw').focus();
 					return false;
 				} else if($('#pw').val() != $('#pw1').val()){
-					alert('비밀번호 입력을 확인하세요');
+					alert('새로 입력한 비밀번호가 일치하지 않습니다. 확인해주세요.');
 					return false;
 				} else{
 					$('#f').attr('action', 'updatePw.do');
@@ -97,7 +99,7 @@
 		
 		<input type="hidden" name="no" value="${loginUser.no}">
 		<input type="button" value="정보변경하기" id="update_btn">
-		<input type="button" value="돌아가기" onclick="location.href='/'">
+		<input type="button" value="돌아가기" onclick="location.href='index.do'">
 	</form>
 	
 </body>

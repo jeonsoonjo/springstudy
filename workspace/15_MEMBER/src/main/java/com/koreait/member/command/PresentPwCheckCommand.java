@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 import com.koreait.member.dto.Member;
+import com.koreait.member.util.SecurityUtils;
 
 public class PresentPwCheckCommand {
 

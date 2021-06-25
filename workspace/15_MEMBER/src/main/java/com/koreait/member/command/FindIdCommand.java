@@ -9,9 +9,8 @@ import org.springframework.ui.Model;
 
 import com.koreait.member.dao.MemberDAO;
 import com.koreait.member.dto.Member;
-import com.koreait.member.util.SecurityUtils;
 
-public class JoinCommand implements MemberCommand {
+public class FindIdCommand implements MemberCommand {
 
 	@Override
 	public void execute(SqlSession sqlSession, Model model) {
@@ -19,19 +18,14 @@ public class JoinCommand implements MemberCommand {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		Member member = new Member();
-		member.setId(id);
-		member.setPw(SecurityUtils.encodeBase64(pw)); // pw의 암호화
-		member.setName(SecurityUtils.xxs(name)); // name의 xxs처리
-		member.setEmail(email);
-		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
-		memberDAO.join(member);
+		Member findUser = memberDAO.findId(email);
+		
+		if(findUser != null) {
+			model.addAttribute("findUser", findUser); // 검색 결과를 표시할 jsp로 전달하기 위해서		
+		}
 
 	}
 
