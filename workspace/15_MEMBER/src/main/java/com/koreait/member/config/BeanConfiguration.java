@@ -10,6 +10,11 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.koreait.member.command.EmailAuthCommand;
 import com.koreait.member.command.IdCheckCommand;
+import com.koreait.member.command.JoinCommand;
+import com.koreait.member.command.LeaveCommand;
+import com.koreait.member.command.LoginCommand;
+import com.koreait.member.command.LogoutCommand;
+import com.koreait.member.command.UpdateMemberCommand;
 
 
 @Configuration
@@ -46,12 +51,30 @@ public class BeanConfiguration {
 		return new EmailAuthCommand();
 	}
 	
+	@Bean
+	public JoinCommand joinCommand() {
+		return new JoinCommand();
+	}
 	
+	@Bean
+	public LoginCommand loginCommand() {
+		return new LoginCommand();
+	}
 	
+	@Bean
+	public LogoutCommand logoutCommand() {
+		return new LogoutCommand();
+	}
 	
+	@Bean
+	public LeaveCommand leaveCommand() {
+		return new LeaveCommand();
+	}
 	
-	
-	
+	@Bean
+	public UpdateMemberCommand updateMemberCommand() {
+		return new UpdateMemberCommand();
+	}
 	
 	
 }

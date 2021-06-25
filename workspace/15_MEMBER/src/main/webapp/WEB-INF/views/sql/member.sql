@@ -12,4 +12,7 @@ CREATE TABLE MEMBER
 );
 
 CREATE SEQUENCE MEMBER_SEQ INCREMENT BY 1 START WITH 1 NOCYCLE NOCACHE;
+insert into MEMBER values(member_seq.nextval, 'admin', '1111', '관리자', 'jeonsoonjo@gmail.com', sysdate);
+insert into MEMBER values(member_seq.nextval, 'soonjo', '1111', '전순조', 'tinasoonj@naver.com', sysdate);
+select * from member;
 

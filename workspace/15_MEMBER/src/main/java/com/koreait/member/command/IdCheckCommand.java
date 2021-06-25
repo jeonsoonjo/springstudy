@@ -16,6 +16,7 @@ public class IdCheckCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
 		String id = request.getParameter("id");
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
 		
