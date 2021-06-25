@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.member.command.EmailAuthCommand;
@@ -19,7 +20,9 @@ import com.koreait.member.command.JoinCommand;
 import com.koreait.member.command.LeaveCommand;
 import com.koreait.member.command.LoginCommand;
 import com.koreait.member.command.LogoutCommand;
+import com.koreait.member.command.PresentPwCheckCommand;
 import com.koreait.member.command.UpdateMemberCommand;
+import com.koreait.member.dto.Member;
 
 @Controller
 public class MemberController {
@@ -33,6 +36,7 @@ public class MemberController {
 	private LogoutCommand logoutCommand;
 	private LeaveCommand leaveCommand;
 	private UpdateMemberCommand updateMemberCommand;
+	private PresentPwCheckCommand PresentPwCheckCommand;
 	
 	// constructor
 	@Autowired
@@ -43,7 +47,8 @@ public class MemberController {
 							LoginCommand loginCommand,
 							LogoutCommand logoutCommand,
 							LeaveCommand leaveCommand,
-							UpdateMemberCommand updateMemberCommand) {
+							UpdateMemberCommand updateMemberCommand,
+							PresentPwCheckCommand presentPwCheckCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.idCheckCommand = idCheckCommand;
@@ -53,6 +58,7 @@ public class MemberController {
 		this.logoutCommand = logoutCommand;
 		this.leaveCommand = leaveCommand;
 		this.updateMemberCommand = updateMemberCommand;
+		this.PresentPwCheckCommand = presentPwCheckCommand;
 	}
 	
 	// method
@@ -117,11 +123,48 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="myPage.do")
-	public String myPage(HttpSession session,
-						 Model model) {
-		model.addAttribute("session", session);
+	public String myPage() {
 		return "member/myPage";
 	}
+	
+	@PostMapping(value="updateMember.do")
+	public String updateMember(HttpServletRequest request,
+							   Model model) {
+		model.addAttribute("request", request);
+		updateMemberCommand.execute(sqlSession, model);
+		return index();
+	}
+	
+	@PostMapping(value="presentPwCheck.do",
+				 produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, Boolean> presentPwCheck(@RequestBody Member member, // 파라미터 없이 json 객체 전달 받을 때 @RequestBody 사용
+											   HttpSession session,
+											   Model model){
+		model.addAttribute("session", session);
+		model.addAttribute("member", member);
+		return PresentPwCheckCommand.execute(model); // sqlSession 있어도 되고 없어도 됨
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -48,7 +48,7 @@
 		이메일 : ${loginUser.email}<br>
 		가입일 : ${loginUser.regdate}<br><br>
 		<a href="logout.do">로그아웃</a><br>
-		<a href="leave_link">회원탈퇴</a><br>
+		<a id="leave_link">회원탈퇴</a><br>
 		<a href="myPage.do">마이페이지</a><br>
 	</c:if>
 	

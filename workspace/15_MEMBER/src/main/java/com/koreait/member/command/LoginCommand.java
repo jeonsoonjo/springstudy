@@ -22,7 +22,7 @@ public class LoginCommand implements MemberCommand {
 		String pw = request.getParameter("pw");
 		
 		// 암호화 된 pw
-		String encodedPw = Encript.base64(pw);
+		String encodedPw = SecurityUtils.encodeBase64(pw);
 		
 		Member member = new Member();
 		member.setId(id);

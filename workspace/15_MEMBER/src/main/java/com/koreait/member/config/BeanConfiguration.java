@@ -14,6 +14,7 @@ import com.koreait.member.command.JoinCommand;
 import com.koreait.member.command.LeaveCommand;
 import com.koreait.member.command.LoginCommand;
 import com.koreait.member.command.LogoutCommand;
+import com.koreait.member.command.PresentPwCheckCommand;
 import com.koreait.member.command.UpdateMemberCommand;
 
 
@@ -75,6 +76,25 @@ public class BeanConfiguration {
 	public UpdateMemberCommand updateMemberCommand() {
 		return new UpdateMemberCommand();
 	}
+	
+	@Bean
+	public PresentPwCheckCommand presentPwCheckCommand() {
+		return new PresentPwCheckCommand();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -1,0 +1,218 @@
+
+1. ojdbc6.jar 추가
+	* 아래 2가지 중 한 가지만 사용
+	1) pom.xml 디펜던시 추가하기
+		<repositories>
+			<repository>
+				<id>oracle</id>
+				<name>Oracle JDBC Repository</name>
+				<url>https://maven.jahia.org/maven2</url>
+			</repository>
+		</repositories>
+		<dependencies>
+			<!-- ojdbc6.jar -->
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc6</artifactId>
+				<version>12.1.0.2</version>
+			</dependency>
+		</dependencies>
+		
+	2) tomcat\lib 디렉터리에 ojdbc6.jar 추가하기(추천)
+		: 한 번만 해놓으면 모든 프로젝트가 jdbc를 사용함
+		
+2. web.xml 아래 인코딩 태그 추가
+	<!-- 인코딩 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+3. 스프링버전에 따른 업데이트 버전으로 변경
+	<properties>
+		<java-version>1.8</java-version>
+		<org.springframework-version>5.1.4.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.9.2</org.aspectj-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
+	</properties>
+	
+4. 디펜던시 추가
+	1) MyBatis 디펜던시 추가
+		<!-- MyBatis 디펜던시 3개: mybatis + mybatis-spring + spring-jdbc -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.4.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
+	2) 이메일 인증 사용 시, 이메일 인증 디펜던시 2개 추가
+		<!-- 이메일 인증 디펜던시 2개: javax.mail과 spring context support -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		<!-- spring version으로 맞추기 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+	
+	3) 암호화 디펜던시 추가
+		<!-- 암호화 처리 -->
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.15</version>
+		</dependency>
+		
+	4) Bean 디펜던시 추가
+		<!-- BeanConfiguration.java -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2.2</version>
+		</dependency>
+		
+	5) json 디펜던시 추가
+		<!-- json과 bean 상호변환 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.4</version>
+		</dependency>
+		
+	6) Servlet 버전 변경
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	7) maven.plugin 버전 변경
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <compilerArgument>-Xlint:all</compilerArgument>
+                <showWarnings>true</showWarnings>
+                <showDeprecation>true</showDeprecation>
+            </configuration>
+        </plugin>
+        
+	8) 파일 업로드 및 다운로드 시, 디펜던시 2개 추가
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.3</version>
+		</dependency>	
+		
+5. pom.xml 최신화: maven update project 실행
+
+6. mapper.xml 준비: com.koreait.file.dao 패키지에 배치
+
+7. SqlSession, CommonsMultipartResolver(파일 첨부 시) bean을 생성
+	1) root-context.xml
+		<!-- DBCP 처리하는 dataSource -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+			<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+			<property name="username" value="spring" />
+			<property name="password" value="1111" />
+		</bean>
+		
+		<!-- SqlSessionFactory -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="mapperLocations" value="classpath:com/koreait/board03/dao/*.xml" />
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+		
+		<!-- SqlSession -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg ref="sqlSessionFactory" />
+		</bean>
+		
+		<!-- CommonsMultipartResolver(첨부파일 사용 시) -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding" value="utf-8" />
+			<property name="maxUploadSize" value="10485760" /> // 계산식을 쓸 수 없음(1024*1024*10)
+		</bean>
+
+	2) BeanConfiguration.java(추천)
+		<!-- DBCP 처리하는 dataSource -->
+		@Bean
+		public DriverManagerDataSource dataSource() {
+			DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+			dataSource.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:xe");
+			dataSource.setUsername("spring");
+			dataSource.setPassword("1111");
+			return dataSource;
+		}
+		<!-- SqlSessionFactory -->
+		@Bean
+		public SqlSessionFactory sqlSessionFactory() throws Exception {
+			SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+			sqlSessionFactory.setDataSource(dataSource());
+			sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/koreait/board03/dao/*.xml"));
+			return sqlSessionFactory.getObject();
+		}
+		<!-- SqlSession -->
+		@Bean
+		public SqlSessionTemplate sqlSession() throws Exception {
+			return new SqlSessionTemplate(sqlSessionFactory());
+		}
+		<!-- CommonsMultipartResolver(첨부파일 사용 시) -->
+		@Bean
+		public CommonsMultipartResolver multipartResolver() {
+			CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+			multipartResolver.setDefaultEncoding("utf-8");
+			multipartResolver.setMaxUploadSize(1024 * 1024 * 10); // Byte 단위(10MB)
+			return multipartResolver;
+		}
+
+

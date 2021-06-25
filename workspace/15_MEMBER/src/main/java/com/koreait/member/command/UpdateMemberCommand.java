@@ -24,7 +24,7 @@ public class UpdateMemberCommand implements MemberCommand {
 		long no = Long.parseLong(request.getParameter("no"));
 		
 		Member member = new Member();
-		member.setName(name);
+		member.setName(SecurityUtils.xxs(name));
 		member.setEmail(email);
 		member.setNo(no);
 		

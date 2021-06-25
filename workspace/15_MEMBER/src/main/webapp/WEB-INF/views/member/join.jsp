@@ -61,7 +61,7 @@
 			$('#id').blur(function(){  // blur : 아이디 입력 후 아이디 입력란을 벗어나면 검사
 				var regID = /^[a-z]{1,5}$/;  // 나중에 수정해서 사용
 				if (!regID.test($('#id').val())) {
-					alert('아이디는 ~~~입니다.');
+					alert('아이디를 입력하세요.');
 					return false;
 				}
 				$.ajax({
@@ -94,7 +94,7 @@
 					alert('사용 가능한 비밀번호입니다.');
 					pwPass = true;
 				} else {
-					alert('비밀번호는 ~~~입니다.');
+					alert('비밀번호를 입력하세요');
 					pwPass = false;
 				}
 			});
