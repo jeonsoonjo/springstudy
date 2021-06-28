@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.member.command.EmailAuthCommand;
 import com.koreait.member.command.FindIdCommand;
+import com.koreait.member.command.FindPwCommand;
 import com.koreait.member.command.IdCheckCommand;
 import com.koreait.member.command.JoinCommand;
 import com.koreait.member.command.LeaveCommand;
@@ -41,6 +43,7 @@ public class MemberController {
 	private PresentPwCheckCommand PresentPwCheckCommand;
 	private UpdatePwCommand updatePwCommand;
 	private FindIdCommand findIdCommand;
+	private FindPwCommand findPwCommand;
 	
 	// constructor
 	@Autowired
@@ -54,7 +57,8 @@ public class MemberController {
 							UpdateMemberCommand updateMemberCommand,
 							PresentPwCheckCommand presentPwCheckCommand,
 							UpdatePwCommand updatePwCommand,
-							FindIdCommand findIdCommand) {
+							FindIdCommand findIdCommand,
+							FindPwCommand findPwCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.idCheckCommand = idCheckCommand;
@@ -67,6 +71,7 @@ public class MemberController {
 		this.PresentPwCheckCommand = presentPwCheckCommand;
 		this.updatePwCommand = updatePwCommand;
 		this.findIdCommand = findIdCommand;
+		this.findPwCommand = findPwCommand;
 	}
 	
 	// method
@@ -174,6 +179,42 @@ public class MemberController {
 		findIdCommand.execute(sqlSession, model);
 		return "member/findIdResult";
 	}
+	
+	@GetMapping(value="findPwPage.do") // 단순이동
+	public String findPwPage() {
+		return "member/findPw";
+	}
+	
+	@GetMapping(value="changePwPage.do") // 파라미터를 가지고 이동
+	public String changePwPage(@ModelAttribute("email") String email) {
+		return "member/changePw";
+	}
+	
+	@PostMapping(value="changePw.do")
+	public String changePw(HttpServletRequest request,
+						   Model model) {
+		model.addAttribute("request", request);
+		findPwCommand.execute(sqlSession, model);
+		return index();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

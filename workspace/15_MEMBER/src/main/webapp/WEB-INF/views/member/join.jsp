@@ -50,7 +50,7 @@
 		var pwPass = false;
 		function fn_pwCheck(){
 			$('#pw').keyup(function(){
-				var regPW = /^[0-9]{1,4}$/;  // 나중에 수정해서 사용
+				var regPW = /^[0-9]{1,4}$/;
 				if (regPW.test($('#pw').val())){
 					$('#pw_result').text('사용 가능한 비밀번호입니다.').css('color', 'blue');
 					pwPass = true;
@@ -64,10 +64,12 @@
 		// 비밀번호 입력 확인
 		var pwPass2 = false;
 		function fn_pwCheck2(){
-			$('#pw2').blur(function(){  // blur : 비밀번호 입력 후 비밀번호 입력란을 벗어나면 검사
+			$('#pw2').keyup(function(){  
 				if ($('#pw').val() == $('#pw2').val()){
+					$('#pw2_result').text('비밀번호가 일치합니다.').css('color', 'blue');
 					pwPass2 = true;
 				} else {
+					$('#pw2_result').text('비밀번호가 일치하지 않습니다.').css('color', 'red');
 					pwPass2 = false;
 				}
 			});
@@ -146,7 +148,8 @@
 		<span id="pw_result"></span><br><br>
 		
 		비밀번호 확인<br>
-		<input type="password" name="pw2" id="pw2"><br><br>
+		<input type="password" name="pw2" id="pw2">
+		<span id="pw2_result"></span><br><br>
 		
 		이름<br>
 		<input type="text" name="name" id="name"><br><br>
