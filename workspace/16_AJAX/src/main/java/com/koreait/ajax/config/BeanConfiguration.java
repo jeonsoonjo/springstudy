@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import com.koreait.ajax.command.InsertMemberCommand;
+import com.koreait.ajax.command.SelectMemberListCommand;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -40,9 +42,15 @@ public class BeanConfiguration {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 	
+	@Bean
+	public InsertMemberCommand insertMemberCommand() {
+		return new InsertMemberCommand();
+	}
 	
-	
-	
+	@Bean
+	public SelectMemberListCommand selectMemberListCommand() {
+		return new SelectMemberListCommand();
+	}
 	
 	
 	

@@ -19,7 +19,35 @@
 		// 1. 회원 목록
 		var page = 1;
 		function fn_selectMemberList(){
-			
+			var obj = {
+				page: page
+			};
+			$.ajax({
+				url: 'selectMemberList.do',
+				type: 'post',
+				contentType: 'application/json',
+				data: JSON.stringify(obj),
+				dataType: 'json',
+				success: function(resultMap){
+					$('#member_list').empty(); // 기존 회원 목록 초기화
+					if(resultMap.exists){
+						// resultMap.list 출력
+						$.each(resultMap.list, function(i, member){
+							$('<tr>')
+							.append('<td>' + member.id + '</td>')  // .append('<td>').text(member.id)
+							.append('<td>' + member.name + '</td>')
+							.append('<td>' + member.address + '</td>')
+							.append('<td>' + member.gender + '</td>')
+							.append('<td><input type="button" value="조회" id="view_btn"></td>')
+							.appendTo('#member_list');
+						});
+					} else{
+						$('<tr>')
+						.append('<td colspan="5">등록된 회원이 없습니다.</td>')
+						.appendTo('#member_list');
+					}
+				}
+			});
 		}
 		
 		// 2. 회원 목록 페이징
@@ -48,8 +76,15 @@
 					contentType: 'application/json',
 					success: function(resultMap){
 						if(resultMap.result > 0){
-							alert('회원 등록이 완료되었습니다.');
+							alert('새로운 회원이 등록되었습니다.');
 							fn_selectMemberList();
+						}
+					},
+					error: function(xhr, testStatus, errorThrown){
+						switch(xhr.status){
+						case 1001:
+							alert(xhr.responseText);
+							break;
 						}
 					}
 				});
