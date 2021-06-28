@@ -21,8 +21,8 @@
 	
 	SqlSessionFactory
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="hikariDataSource" />
 		<property name="mapperLocations" value="classpath:com/koreait/ajax/doa/*.xml" />
+		<property name="dataSource" ref="hikariDataSource" />
 	</bean>
 	
 	SqlSession

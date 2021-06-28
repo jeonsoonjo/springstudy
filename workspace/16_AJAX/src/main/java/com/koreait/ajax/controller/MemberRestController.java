@@ -19,6 +19,13 @@ public class MemberRestController {
 		this.sqlSession = sqlSession;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
