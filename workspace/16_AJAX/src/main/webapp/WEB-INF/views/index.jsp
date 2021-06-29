@@ -9,7 +9,9 @@
 <body>
 
 	<a href="manageMember.do">회원관리로 이동</a>
-
+	<br>
+	<a href="manageMemberRest.do">RESTful 회원관리로 이동</a>
+	
 </body>
 </html>
 

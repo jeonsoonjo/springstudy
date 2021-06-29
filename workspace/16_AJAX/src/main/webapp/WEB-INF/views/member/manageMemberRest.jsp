@@ -20,14 +20,10 @@
 		// 1. 회원 목록
 		var page = 1; // 전역변수  page는 페이징을 클릭하면 fn_paging()에 의해서 값이 변한다
 		function fn_selectMemberList(){
-			var obj = {
-				page: page
-			};
 			$.ajax({
-				url: 'selectMemberList.do',
-				type: 'post',
-				contentType: 'application/json',
-				data: JSON.stringify(obj),
+				url: 'member',
+				type: 'get',
+				data: 'page=' + page,
 				dataType: 'json',
 				success: function(resultMap){
 					// 1-1. 목록 만들기
@@ -116,16 +112,10 @@
 		function fn_selectMemberByNo(){
 			$('body').on('click', '#view_btn', function(){
 				$('input:text[name="id"]').attr('readonly', true);
-				var obj = {
-						no: $(this).siblings('#no').val()
-						// no: $(this).prev().val()
-				};
 				$.ajax({
-					url: 'selectMemberByNo.do',
-					type: 'post',
-					contentType: 'application/json',
-					data: JSON.stringify(obj), // JSON 전달
-					dataType: 'json', // 받아오는 데이터 타입
+					url: 'member/' + $(this).prev().val(),
+					type: 'get',
+					dataType: 'json',
 					success: function(resultMap){
 						if(resultMap.exists){
 							$('input:text[name="id"]').val(resultMap.member.id);
@@ -151,7 +141,7 @@
 					gender: $('input:radio[name="gender"]:checked').val()
 				};
 				$.ajax({
-					url: 'insertMember.do',
+					url: 'member',
 					type: 'post',
 					contentType: 'application/json',
 					data: JSON.stringify(member), 
@@ -184,8 +174,8 @@
 				};
 				// console.log(obj);
 				$.ajax({
-					url: 'updateMember.do',
-					type: 'post',
+					url: 'member',
+					type: 'put',
 					contentType: 'application/json',
 					data: JSON.stringify(obj),
 					success: function(resultMap){
@@ -206,14 +196,9 @@
 				if(!confirm('삭제할까요?')){
 					return false;
 				}
-				var obj = {
-						no: $('#view_area input:hidden[name="no"]').val()
-				};
 				$.ajax({
-					url: 'deleteMember.do',
-					type: 'post',
-					contentType: 'application/json',
-					data: JSON.stringify(obj),
+					url: 'member/' + $('#view_area input:hidden[name="no"]').val(),
+					type: 'delete',
 					dataType: 'json',
 					success: function(resultMap){
 						if(resultMap.count > 0){

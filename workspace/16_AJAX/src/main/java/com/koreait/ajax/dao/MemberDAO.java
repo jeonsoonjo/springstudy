@@ -12,8 +12,8 @@ public interface MemberDAO {
 	public int getTotalMemberCount(); // 전체 인원 구하기
 	public List<Member> selectMemberList(Page paging);
 	public Member selectMemberByNo(long no);
-	
-	
+	public int updateMember(Member member);
+	public int deleteMember(long no);
 	
 }
 
