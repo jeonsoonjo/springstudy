@@ -17,7 +17,7 @@
 		});
 		
 		// 1. 회원 목록
-		var page = 1;
+		var page = 1; // 전역변수  page는 페이징을 클릭하면 fn_paging()에 의해서 값이 변한다
 		function fn_selectMemberList(){
 			var obj = {
 				page: page
@@ -29,16 +29,17 @@
 				data: JSON.stringify(obj),
 				dataType: 'json',
 				success: function(resultMap){
+					// 1-1. 목록 만들기
 					$('#member_list').empty(); // 기존 회원 목록 초기화
 					if(resultMap.exists){
 						// resultMap.list 출력
 						$.each(resultMap.list, function(i, member){
 							$('<tr>')
-							.append('<td>' + member.id + '</td>')  // .append('<td>').text(member.id)
-							.append('<td>' + member.name + '</td>')
-							.append('<td>' + member.address + '</td>')
-							.append('<td>' + member.gender + '</td>')
-							.append('<td><input type="button" value="조회" id="view_btn"></td>')
+							.append($('<td>').text(member.id))
+							.append($('<td>').text(member.name))
+							.append($('<td>').text(member.address))
+							.append($('<td>').text(member.gender))
+							.append($('<td>').html('<input type="hidden" name="no" id="no" value="' + member.no + '"><input type="button" value="조회" id="view_btn">'))
 							.appendTo('#member_list');
 						});
 					} else{
@@ -46,18 +47,96 @@
 						.append('<td colspan="5">등록된 회원이 없습니다.</td>')
 						.appendTo('#member_list');
 					}
+					// 1-2. 페이징 만들기
+					var paging = resultMap.paging;
+					$('#paging').empty(); // 기존 페이징 초기화
+					// 1) 이전
+					if(paging.beginPage <= paging.pagePerBlock){ // 이전 페이지가 없을 때(1페이지)
+						$('<div>')
+						.addClass('disable')
+						.text('◀')
+						.appendTo('#paging');
+					} else{ // 이전 페이지가 있을 때
+						$('<div>')
+						.addClass('previous_block').addClass('link')
+						.attr('data-page', paging.beginPage - 1)
+						.text('◀')
+						.appendTo('#paging');
+					}
+					// 2) 페이지 번호(1, 2, 3, 4, 5)
+					for(let p=paging.beginPage; p<=paging.endPage; p++){
+						if(p == paging.page){ // 표시된 페이지가 현재 페이지(링크 없음을 의미)
+							$('<div>')
+							.addClass('now_page')
+							.text(p)
+							.appendTo('#paging');
+						} else{
+							$('<div>')
+							.addClass('go_page').addClass('link')
+							.attr('data-page', p)
+							.text(p)
+							.appendTo('#paging');
+						}
+					}
+					// 3) 다음
+					if(paging.endPage == paging.totalPage){ // 다음 페이지가 없을 때(마지막 페이지)
+						$('<div>')
+						.addClass('disable')
+						.text('▶')
+						.appendTo('#paging');
+					} else{ //  다음 페이지가 있을 때
+						$('<div>')
+						.addClass('next_block').addClass('link')
+						.attr('data-page', paging.endPage + 1)
+						.text('▶')
+						.appendTo('#paging');
+					}
 				}
 			});
 		}
 		
-		// 2. 회원 목록 페이징
+		// 2. 회원 목록 페이징(페이징 링크 처리)
 		function fn_paging(){
-			
+			$('body').on('click', '.previous_block', function(){ // 위에서 동적으로 만들어진 함수는 $('#') 사용할 수 없다
+				page = $(this).attr('data-page');
+				fn_selectMemberList();
+			});
+			$('body').on('click', '.go_page', function(){
+				page = $(this).attr('data-page');
+				fn_selectMemberList();
+			});
+			$('body').on('click', '.next_block', function(){
+				page = $(this).attr('data-page');
+				fn_selectMemberList();
+			});
 		}
 		
 		// 3. 회원 정보 보기
 		function fn_selectMemberByNo(){
-			
+			$('body').on('click', '#view_btn', function(){
+				var obj = {
+						no: $(this).siblings('#no').val()
+						// no: $(this).prev().val()
+				};
+				$.ajax({
+					url: 'selectMemberByNo.do',
+					type: 'post',
+					contentType: 'application/json',
+					data: JSON.stringify(obj),
+					dataType: 'json',
+					success: function(resultMap){
+						if(resultMap.exists){
+							$('input:text[name="id"]').val(resultMap.member.id);
+							$('input:text[name="name"]').val(resultMap.member.name);
+							$('input:text[name="address"]').val(resultMap.member.address);
+							$('input:radio[name="gender"][value="' + resultMap.member.gender + '"]').prop('checked', true);
+							$('#view_area input:hidden[name="no"]').val(resultMap.member.no);
+						} else{
+							alert(obj.no + '번 회원 정보는 없습니다.');
+						}
+					}
+				});
+			});
 		}
 		
 		// 4. 회원 등록
@@ -101,18 +180,43 @@
 			
 		}
 	</script>
+	<style>
+		#paging{
+			width: 50%;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			text-align: center;
+		}
+		#paging div{
+			width: 40px;
+			height: 20px;
+		}
+		.disable{
+			color: silver;
+		}
+		.link{
+			cursor: pointer;
+		}
+		.now_page{
+			color: limegreen;
+		}
+	</style>
 </head>
 <body>
 
 	<h1>회원 관리</h1>
 	
-	아이디<input type="text" name="id" id="id"><br>
-	이름<input type="text" name="name" id="name"><br>
-	주소<input type="text" name="address" id="address"><br>
-	성별
-	<input type="radio" name="gender" id="male" value="남"><label for="male">남</label>
-	<input type="radio" name="gender" id="female" value="여"><label for="female">여</label><br>
-	<input type="button" id="insert_btn" value="등록"><br>
+	<div id="view_area">
+		아이디<input type="text" name="id" id="id"><br>
+		이름<input type="text" name="name" id="name"><br>
+		주소<input type="text" name="address" id="address"><br>
+		성별
+		<input type="radio" name="gender" id="male" value="남"><label for="male">남</label>
+		<input type="radio" name="gender" id="female" value="여"><label for="female">여</label><br>
+		<input type="hidden" name="no">
+		<input type="button" id="insert_btn" value="등록"><br>
+	</div>
 	
 	<hr>
 	
