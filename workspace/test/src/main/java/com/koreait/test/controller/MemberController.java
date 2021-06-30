@@ -25,6 +25,10 @@ public class MemberController {
 		return "index";
 	}
 	
+	@GetMapping(value="loginPage.do") // 단순이동
+	public String loginPage() {
+		return "member/login";
+	}
 	
 	
 	

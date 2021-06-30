@@ -8,6 +8,8 @@ public class QueryDTO {
 	// field
 	private String column;
 	private String query;
+	private String top;
+	private String bottom;
 	private int beginRecord;
 	private int endRecord;
 	

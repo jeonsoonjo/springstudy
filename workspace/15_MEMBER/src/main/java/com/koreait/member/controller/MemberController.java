@@ -80,7 +80,7 @@ public class MemberController {
 		return "index";
 	}
 	
-	@GetMapping(value="joinPage.do")
+	@GetMapping(value="joinPage.do") // 단순이동
 	public String joinPage() {
 		return "member/join";
 	}

@@ -70,7 +70,7 @@
 		
 		<section>
 			<!-- 이미지(슬라이드) -->
-			<div id="images">
+			<!-- <div id="images">
 				<div class="imgslide">
 					<ul>
 						<li><img src="resources/assets/images/slide(1).jpg" alt="no"></li>
@@ -78,37 +78,37 @@
 						<li><img src="resources/assets/images/slide(3).jpg" alt="no"></li>
 						<li><img src="resources/assets/images/slide(1).jpg" alt="no"></li>
 					</ul>
-					<!-- 이미지 텍스트 -->
+					이미지 텍스트
 					<div class="imgtext">
 						<h2><span>Wedding Planner</span></h2>
 					</div>
-					<!-- 이미지 버튼 -->
+					이미지 버튼
 					<div class="imgslide_btn">
 				      <a href="#" class="slide_btn_prev off">이전</a>
 				      <a href="#" class="slide_btn_next">다음</a>
 				    </div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 내용 -->
-			<div id="contents">
-				<!-- 게시판 미리보기 -->
+			<!-- <div id="contents">
+				게시판 미리보기
 				<div class="board">
 			    	<h2>게시판</h2>
 			        <table class="table">
 			          
 			        </table>
 			    </div>
-			    <!-- 파트너(팝업) -->
+			    파트너(팝업)
 			    <div class="partner">
 			    	
 			    </div>
 			</div>
 			
-			<!-- 아이콘 -->
+			아이콘
 			<div id="icons">
 				<div class="icon_btn">
 					
 				</div>
-			</div>
+			</div> -->
 
