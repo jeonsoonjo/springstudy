@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>환영합니다</title>
+	<title>Wedding</title>
 	<link rel="stylesheet" href="resources/assets/css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -20,8 +20,8 @@
 			</div>
 			<!-- 로그인 및 회원가입 -->
 			<div class="info">
-				<a href="">로그인</a>
-				<a href="">회원가입</a>
+				<a href="loginPage.do">로그인</a>
+				<a href="joinPage.do">회원가입</a>
 			</div>
 			<!-- 메뉴 -->
 			<div class="menu">

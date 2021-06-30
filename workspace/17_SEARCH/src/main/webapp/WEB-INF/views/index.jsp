@@ -11,6 +11,7 @@
 			fn_search();
 			fn_init();
 			fn_search_all();
+			fn_auto_complete();
 		});
 		
 		function fn_search(){
@@ -30,6 +31,30 @@
 				location.href = 'searchAll.do';
 			});
 		}
+		
+		function fn_auto_complete(){
+			$('#query').keyup(function(){
+				$('#auto_complete_list').empty();
+				var obj = {
+					column: $('#column').val(),
+					query: $('#query').val()
+				};
+				$.ajax({
+					url: 'autoComplete.do',
+					type: 'post',
+					contentType: 'application/json',
+					data: JSON.stringify(obj),
+					dataType: 'text',
+					success: function(resultMap){
+						alert(resultMap.status);
+						console.log(resultMap.list);
+					},
+					error: function(){
+						alert('실패');
+					}
+				});
+			});
+		}
 	</script>
 </head>
 <body>
@@ -39,9 +64,11 @@
 		<select name="column" id="column">
 			<option value="">:::선택:::</option>
 			<option value="EMPLOYEE_ID">EMPLOYEE_ID</option>
+			<option value="FIRST_NAME">FIRST_NAME</option>
 			<option value="LAST_NAME">LAST_NAME</option>
 		</select>
-		<input type="text" name="query" id="query">
+		<input list="auto_complete_list" type="text" name="query" id="query">
+		<datalist id="auto_complete_list"></datalist>
 		<input type="button" value="검색" id="search_btn">
 		<input type="button" value="초기화" id="init_btn">
 		<input type="button" value="전체조회" id="search_all_btn">

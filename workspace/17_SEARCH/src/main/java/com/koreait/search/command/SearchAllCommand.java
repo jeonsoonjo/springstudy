@@ -36,11 +36,6 @@ public class SearchAllCommand implements SearchCommand {
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
 		
-		
-		
-		
-		
-		
 	}
 
 }

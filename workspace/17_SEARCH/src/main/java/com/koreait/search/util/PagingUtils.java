@@ -13,6 +13,7 @@ public class PagingUtils {
 	public static int beginPage;
 	public static int endPage;
 	
+	// ajax
 	public static PageDTO getPage(int totalRecord, int page) {
 		beginRecord = (page - 1) * recordPerPage + 1;
 		endRecord = beginRecord + recordPerPage - 1;
@@ -37,6 +38,7 @@ public class PagingUtils {
 		return pageDTO;
 	}
 	
+	// mvc
 	// ◀ 1 2 3 4 5 ▶ 반환
 	public static String getPaging(String path, int page) {
 		StringBuilder sb = new StringBuilder();
