@@ -16,8 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  		  FROM (SELECT EMPLOYEE_ID AS EMPLOYEEID
 		  		  			 , FIRST_NAME AS FIRSTNAME
 		  		  			 , LAST_NAME AS LASTNAME
-		  		  			 , HIRE_DATE AS HIRE_ATE
-		  		  			 , SALARY AS SALARY
+		  		  			 , HIRE_DATE AS HIREDATE
+		  		  			 , SALARY
 		  		  			 , DEPARTMENT_ID AS DEPARTMENTID
 		  		  		  FROM EMPLOYEES
 		  		  		 ORDER BY EMPLOYEE_ID) A) B
@@ -25,11 +25,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="autoComplete" resultType="com.koreait.search.dto.Employees">
-		SELECT <if test="column == 'EMPLOYEE_ID'">EMPLOYEE_ID AS EMPLOYEEID</if>
+		SELECT DISTINCT
+			   <if test="column == 'EMPLOYEE_ID'">EMPLOYEE_ID AS EMPLOYEEID</if>
 			   <if test="column == 'FIRST_NAME'">FIRST_NAME AS FIRSTNAME</if>
 			   <if test="column == 'LAST_NAME'">LAST_NAME AS LASTNAME</if>
 		  FROM EMPLOYEES
 		 WHERE ${column} LIKE #{query} || '%'
+	</select>
+	
+	<select id="getSearchRecord" resultType="int">
+		SELECT COUNT(EMPLOYEE_ID)
+		  FROM EMPLOYEES
+		 WHERE ${column} LIKE '%' || #{query} || '%'
+	</select>
+	
+	<select id="search" resultType="com.koreait.search.dto.Employees">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT EMPLOYEE_ID AS EMPLOYEEID
+		  		  			 , FIRST_NAME AS FIRSTNAME
+		  		  			 , LAST_NAME AS LASTNAME
+		  		  			 , HIRE_DATE AS HIREDATE
+		  		  			 , SALARY
+		  		  			 , DEPARTMENT_ID AS DEPARTMENTID
+		  		  		  FROM EMPLOYEES
+		  		  		 WHERE ${column} LIKE '%' || #{query} || '%'
+		  		  		 ORDER BY EMPLOYEE_ID) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
 
 </mapper>

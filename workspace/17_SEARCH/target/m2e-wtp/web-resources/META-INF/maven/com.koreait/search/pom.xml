@@ -17,6 +17,14 @@
 	
 	<dependencies>
 	
+		<!-- JSON In Java -->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20180813</version>
+		</dependency>
+		
 		<!-- MyBatis 디펜던시 3개: mybatis + mybatis-spring + spring-jdbc -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>

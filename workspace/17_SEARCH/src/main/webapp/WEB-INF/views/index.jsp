@@ -16,6 +16,11 @@
 		
 		function fn_search(){
 			$('#search_btn').click(function(){
+				if($('#column').val() == ''){
+					alert('검색 카테고리를 선택하세요.');
+					$('#column').focus();
+					return false;
+				}
 				$('#f').attr('action', 'search.do');
 				$('#f').submit();
 			});
@@ -34,7 +39,7 @@
 		
 		function fn_auto_complete(){
 			$('#query').keyup(function(){
-				$('#auto_complete_list').empty();
+				$('#auto_complete_list').empty();  // 내부 value 태그 모두 지워줌
 				var obj = {
 					column: $('#column').val(),
 					query: $('#query').val()
@@ -46,10 +51,17 @@
 					data: JSON.stringify(obj),
 					dataType: 'text',
 					success: function(resultMap){
-						alert(resultMap.status);
-						console.log(resultMap.list);
+						// console.log(resultMap);
+						var result = JSON.parse(resultMap);
+						if (result.status == 200) {
+							$.each(result.list, function(i, employee){
+								$('<option>')
+								.val(employee[$('#column').find('option[value="' + obj.column + '"]').data('name')])
+								.appendTo('#auto_complete_list');
+							});
+						}
 					},
-					error: function(){
+					error: function() {
 						alert('실패');
 					}
 				});
@@ -60,13 +72,14 @@
 <body>
 
 	<!-- 검색화면 -->
-	<form id="f" action="" method="get">
+	<form id="f" method="get">
 		<select name="column" id="column">
 			<option value="">:::선택:::</option>
-			<option value="EMPLOYEE_ID">EMPLOYEE_ID</option>
-			<option value="FIRST_NAME">FIRST_NAME</option>
-			<option value="LAST_NAME">LAST_NAME</option>
+			<option value="EMPLOYEE_ID" data-name="employeeId">EMPLOYEE_ID</option>
+			<option value="FIRST_NAME" data-name="firstName">FIRST_NAME</option>
+			<option value="LAST_NAME" data-name="lastName">LAST_NAME</option>
 		</select>
+		
 		<input list="auto_complete_list" type="text" name="query" id="query">
 		<datalist id="auto_complete_list"></datalist>
 		<input type="button" value="검색" id="search_btn">
