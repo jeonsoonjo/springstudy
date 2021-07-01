@@ -16,6 +16,13 @@
 	</properties>
 	
 	<dependencies>
+		
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+		<dependency>
+    			<groupId>com.zaxxer</groupId>
+    			<artifactId>HikariCP</artifactId>
+    			<version>3.3.0</version>
+		</dependency>
 	
 		<!-- MyBatis 디펜던시 3개: mybatis + mybatis-spring + spring-jdbc -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
