@@ -161,6 +161,7 @@
 		
 
 	8) hikariCP(속도 빠른 JDBC Pools) 디펜던시 추가
+		<!-- Hikari(DBCP) -->
 		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 		<dependency>
     			<groupId>com.zaxxer</groupId>
@@ -169,13 +170,13 @@
 		</dependency>
         
 	9) 파일 업로드 및 다운로드 시, 디펜던시 2개 추가
+		<!-- 파일 업로드 및 다운로드 -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
 		    <version>2.6</version>
 		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
