@@ -25,7 +25,7 @@ public class UpdatePwCommand implements MemberCommand {
 		long no = Long.parseLong(request.getParameter("no"));
 		
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setPw(SecurityUtils.encodeBase64(pw));
+		memberDTO.setPw(pw);
 		memberDTO.setNo(no);
 		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);

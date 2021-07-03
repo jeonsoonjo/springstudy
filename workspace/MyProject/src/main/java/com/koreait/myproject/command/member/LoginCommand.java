@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 
 import com.koreait.myproject.dao.MemberDAO;
 import com.koreait.myproject.dto.MemberDTO;
+import com.koreait.myproject.util.SecurityUtils;
 
 
 public class LoginCommand implements MemberCommand {
@@ -24,7 +25,7 @@ public class LoginCommand implements MemberCommand {
 		
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(id);
-		memberDTO.setPw(pw);
+		memberDTO.setPw(SecurityUtils.encodeBase64(pw));
 		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
 		MemberDTO loginUser = memberDAO.login(memberDTO);

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import com.koreait.integration.repository.StaffRepository;
+import com.koreait.integration.service.StaffServiceImpl;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -42,7 +44,14 @@ public class BeanConfiguration {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
 	
-
+	@Bean
+	public StaffRepository repository() {
+		return new StaffRepository();
+	}
+	@Bean
+	public StaffServiceImpl staffService() {
+		return new StaffServiceImpl();
+	}
 	
 	
 	
