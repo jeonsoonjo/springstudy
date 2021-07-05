@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreait.myproject.command.member.EmailAuthCommand;
+import com.koreait.myproject.command.member.EmailCheckCommand;
 import com.koreait.myproject.command.member.IdCheckCommand;
 import com.koreait.myproject.command.member.JoinCommand;
 import com.koreait.myproject.command.member.LoginCommand;
@@ -31,6 +32,7 @@ public class MemberController {
 	private SqlSession sqlSession;
 	private LoginCommand loginCommand;
 	private IdCheckCommand idCheckCommand;
+	private EmailCheckCommand emailCheckCommand;
 	private EmailAuthCommand emailAuthCommand;
 	private JoinCommand joinCommand;
 	private PresentPwCheckCommand presentPwCheckCommand;
@@ -44,6 +46,7 @@ public class MemberController {
 							LoginCommand loginCommand,
 							IdCheckCommand idCheckCommand,
 							EmailAuthCommand emailAuthCommand,
+							EmailCheckCommand emailCheckCommand,
 							JoinCommand joinCommand,
 							PresentPwCheckCommand presentPwCheckCommand,
 							UpdatePwCommand updatePwCommand,
@@ -54,11 +57,13 @@ public class MemberController {
 		this.loginCommand = loginCommand;
 		this.idCheckCommand = idCheckCommand;
 		this.emailAuthCommand = emailAuthCommand;
+		this.emailCheckCommand = emailCheckCommand;
 		this.joinCommand = joinCommand;
 		this.presentPwCheckCommand = presentPwCheckCommand;
 		this.updatePwCommand = updatePwCommand;
 		this.updateMemberCommand = updateMemberCommand;
 		this.logoutCommand = logoutCommand;
+		
 	}
 	
 	@GetMapping(value= {"/", "index.do"})
@@ -84,6 +89,13 @@ public class MemberController {
 		model.addAttribute("request", request);
 		return idCheckCommand.execute(sqlSession, model);
 	}
+	// 이메일 중복체크(emailCheck) 
+	@ResponseBody
+	@GetMapping(value="emailCheck.do", produces="application/json; charset=utf-8")
+	public Map<String, Integer> emailCheck(HttpServletRequest request, Model model){
+		model.addAttribute("request", request);
+		return emailCheckCommand.execute(sqlSession, model);
+	}
 	// 이메일 인증코드 받기(emailCode)
 	@ResponseBody
 	@GetMapping(value="emailCode.do", produces="application/json; charset=utf-8")
@@ -98,14 +110,14 @@ public class MemberController {
 		joinCommand.execute(sqlSession, model);
 		return "redirect:/";
 	}
-	// 현재 비밀번호 체크(presentPwCheck)
+	// 현재 비밀번호 확인(presentPwCheck)
 	@ResponseBody
 	@PostMapping(value="presentPwCheck.do", produces="application/json; charset=utf-8")
 	public Map<String, Boolean> presentPwCheck(@RequestBody MemberDTO memberDTO, HttpSession session, Model model){
 		model.addAttribute("session", session);
 		model.addAttribute("memberDTO", memberDTO);
-		return presentPwCheckCommand.execute(sqlSession, model);
-	}
+		return presentPwCheckCommand.execute(sqlSession, model); // sqlSession 있어도 되고 없어도 됨
+}
 	// 비밀번호 변경(updatePw)
 	@PostMapping(value="updatePw.do")
 	public String updatePw(HttpServletRequest request, Model model) {
@@ -120,6 +132,7 @@ public class MemberController {
 		updateMemberCommand.execute(sqlSession, model);
 		return index();
 	}
+	// 로그아웃(logout)
 	@GetMapping(value="logout.do")
 	public String logout(HttpSession session, Model model) {
 		model.addAttribute("session", session);

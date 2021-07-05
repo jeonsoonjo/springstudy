@@ -52,18 +52,6 @@ public class BeanConfiguration {
 	public StaffServiceImpl staffService() {
 		return new StaffServiceImpl();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
 }

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 
 import com.koreait.myproject.dao.MemberDAO;
 import com.koreait.myproject.dto.MemberDTO;
-import com.koreait.myproject.util.SecurityUtils;
 
 public class JoinCommand implements MemberCommand {
 
@@ -28,7 +27,7 @@ public class JoinCommand implements MemberCommand {
 		
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId(id);
-		memberDTO.setPw(SecurityUtils.encodeBase64(pw)); // 비번찾기: SecurityUtils.encodeBase64(pw)
+		memberDTO.setPw(pw); // 비번찾기: SecurityUtils.encodeBase64(pw)
 		memberDTO.setName(name);
 		memberDTO.setPhone(phone);
 		memberDTO.setEmail(email);

@@ -9,6 +9,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.koreait.myproject.command.member.EmailAuthCommand;
+import com.koreait.myproject.command.member.EmailCheckCommand;
 import com.koreait.myproject.command.member.IdCheckCommand;
 import com.koreait.myproject.command.member.JoinCommand;
 import com.koreait.myproject.command.member.LoginCommand;
@@ -67,6 +68,10 @@ public class BeanConfiguration {
 		return new IdCheckCommand();
 	}
 	@Bean
+	public EmailCheckCommand EmailCheckCommand() {
+		return new EmailCheckCommand();
+	}
+	@Bean
 	public EmailAuthCommand emailAuthCommand() {
 		return new EmailAuthCommand();
 	}
@@ -75,7 +80,7 @@ public class BeanConfiguration {
 		return new JoinCommand();
 	}
 	@Bean
-	public PresentPwCheckCommand presentPwCheckCommand() {
+	public PresentPwCheckCommand PresentPwCheckCommand() {
 		return new PresentPwCheckCommand();
 	}
 	@Bean
@@ -91,8 +96,7 @@ public class BeanConfiguration {
 		return new LogoutCommand();
 	}
 	
-	
-	
+
 	
 	
 	

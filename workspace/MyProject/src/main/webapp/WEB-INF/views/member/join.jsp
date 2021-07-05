@@ -14,6 +14,7 @@
 			fn_idCheck();
 			fn_pwCheck();
 			fn_pwCheck2();
+			fn_emailCheck();
 			fn_email_code();
 			fn_join();
 		});
@@ -22,9 +23,9 @@
 		var idPass = false;
 		function fn_idCheck(){
 			$('#id').keyup(function(){
-				var regID = /^[a-z]{3,5}$/; // ^[a-z][a-z0-9_-]{4,19}$
+				var regID = /^[a-z]{3,6}$/; // ^[a-z][a-z0-9_-]{4,19}$
 				if(!regID.test($('#id').val())){
-					$('.id_result').text('아이디는 영어 소문자 3~5자리만 입력 가능합니다.');
+					$('.id_result').text('아이디는 영어 소문자 3~6자리만 입력 가능합니다.');
 					// 아이디는 영어 소문자(a~z)로 시작하고, 소문자/숫자(0~9)/특수기호(_, -) 포함 5~20자 입니다.
 					return false;
 				}
@@ -76,6 +77,31 @@
 				}
 			});
 		}
+		// 이메일 중복 체크
+		var emailPass = false;
+		function fn_emailCheck(){
+			$('#email').keyup(function(){
+				$.ajax({
+					url: 'emailCheck.do',
+					type: 'get',
+					data: 'email=' + $('#email').val(),
+					dataType: 'json',
+					success: function(res){
+						if(res.count == 0){
+							$('.email_result').text('사용 가능한 이메일입니다.');
+							emailPass = true;
+						} else{
+							$('.email_result').text('이미 사용 중인 아이디입니다.');
+							emailPass = false;
+						}
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						
+					}
+				});
+			})
+			
+		}
 		// 이메일 인증코드 받기 : email_code
 		// 이메일 인증코드 받기(root-context에서 이메일 bean 생성)
 		function fn_email_code(){
@@ -105,10 +131,10 @@
 		function fn_email_auth(authCode){
 			$('#email_auth_btn').click(function(){
 				if(authCode == $('#user_key').val()){
-					$('.email_result').text('인증되었습니다.');
+					$('.emailAuth_result').text('인증되었습니다.');
 					authPass = true;
 				} else{
-					$('.email_result').text('인증에 실패했습니다. 다시 시도해주세요.');
+					$('.emailAuth_result').text('인증에 실패했습니다. 다시 시도해주세요.');
 					$('#email').val() = '';
 					authPass = false;
 				}
@@ -190,10 +216,11 @@
 	
 			<span class="naming">이메일</span><br>
 			<input type="text" name="email" id="email">
+			<span class="email_result"></span><br>
 			<input type="button" value="인증번호 받기" id="email_code_btn"><br>
 			<input type="text" name="user_key" id="user_key">
 			<input type="button" value="인증하기" id="email_auth_btn"><br>
-			<span class="email_result"></span><br>
+			<span class="emailAuth_result"></span><br>
 			
 			<span class="naming">주소</span><br>
 			<input type="text" name="address" id="address">

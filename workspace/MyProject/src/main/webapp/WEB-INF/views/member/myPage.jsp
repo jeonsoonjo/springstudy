@@ -28,8 +28,8 @@
 		var presentPwPass = false;
 		function fn_presentPwCheck(){
 			$('#pw0').keyup(function(){
-				var obj = { // 비밀번호 객체 생성
-						pw: $('#pw0').val()
+				var obj = { // 현재 비밀번호 객체 생성
+					pw: $('#pw0').val()
 				};
 				$.ajax({
 					url: 'presentPwCheck.do',
@@ -69,17 +69,17 @@
 		}
 	</script>
 	<style>
-		.menu{
+		.menu2{
 			width: 600px;
 			margin: 50px auto;
 			display: flex;
 			justify-content: space-between;
 			border-bottom: 1px solid gray;
 		}
-		.menu input[type=button]:hover{
+		.menu2 input[type=button]:hover{
 			cursor: pointer;
 		}
-		.board{
+		.board2{
 			border: none;
 			padding: 5px;
 			text-align: center;
@@ -88,7 +88,7 @@
 			font-size: 15px;
 			font-weight: 500;
 		}
-		.menu > a{
+		.menu2 > a{
 			padding: 5px;
 			text-decoration: none;
 			color: navy;
@@ -105,12 +105,12 @@
 	
 	<c:if test="${loginUser != null}">
 		<!-- 메뉴 -->
-		<div class="menu">
-			<input type="button" class="board" value="회원정보">
-			<input type="button" class="board" value="갤러리 게시판">
-			<input type="button" class="board" value="자유 게시판">
-			<input type="button" class="board" value="로그아웃" onclick="location.href='logout.do'">
-			<input type="button" class="board" value="회원탈퇴">
+		<div class="menu2">
+			<input type="button" class="board2" value="회원정보">
+			<input type="button" class="board2" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
+			<input type="button" class="board2" value="자유 게시판">
+			<input type="button" class="board2" value="로그아웃" onclick="location.href='logout.do'">
+			<input type="button" class="board2" value="회원탈퇴">
 		</div>
 		
 		<div class="myPage_form">

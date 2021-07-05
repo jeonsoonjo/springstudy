@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.integration1.repository.searchBoard">
+
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(NO)
+		  FROM SEARCHBOARD
+	</select>
+	
+	<select id="selectAll" resultType="com.koreait.integration1.domain.SearchBoard">
+		SELECT NO, TITLE, CONTENT, REGDATE
+		  FROM SEARCHBOARD
+	</select>
+	
+	<select id="selectQuery" resultType="com.koreait.integration1.domain.SearchBoard">
+		SELECT NO, TITLE, CONTENT, REGDATE
+		  FROM SEARCHBOARD
+		<if test="column == 'TITLE'">WHERE TITLE LIKE '%' || #{query} || '%'</if>
+		<if test="column != 'TITLE'">WHERE ${column} LIKE '%' || #{query} || '%'</if>
+	</select>
+
+
+</mapper>
+
+

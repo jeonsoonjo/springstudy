@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.myproject.dao.ImgBoardDAO">
+
+	<select id="selectImgBoardList" resultType="com.koreait.myproject.dto.ImgBoardDTO">
+		SELECT IDX, WRITER, TITLE, CONTENT, FILENAME, IP, HIT, POSTDATE, LASTMODIFIED
+		  FROM IMGBOARD
+		 ORDER BY IDX DESC
+	</select>
+
+
+
+
+
+</mapper>
+

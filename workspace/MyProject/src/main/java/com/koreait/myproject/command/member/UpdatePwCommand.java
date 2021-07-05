@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 
 import com.koreait.myproject.dao.MemberDAO;
 import com.koreait.myproject.dto.MemberDTO;
-import com.koreait.myproject.util.SecurityUtils;
 
 
 public class UpdatePwCommand implements MemberCommand {
@@ -34,7 +33,7 @@ public class UpdatePwCommand implements MemberCommand {
 			HttpSession session = request.getSession();
 			MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
 			if(loginUser != null) {
-				loginUser.setPw(SecurityUtils.encodeBase64(pw));
+				loginUser.setPw(pw);
 			}
 		}
 

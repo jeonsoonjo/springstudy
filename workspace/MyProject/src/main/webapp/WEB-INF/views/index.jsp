@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +10,10 @@
 	<script type="text/javascript">
 		// 페이지 로드
 		$(document).ready(function(){
-			fn_login();
 			fn_imgBoard();
 			fn_board();
+			fn_login();
 		});
-		// 로그인(login)
-		function fn_login(){
-			$('#f').submit(function(e){
-				if($('#id').val() == '' || $('#pw').val() == ''){
-					alert('아이디와 비밀번호는 필수입니다.');
-					e.preventDefault();
-					return false;
-				}
-			});
-		}
 		// 회원만 게시판 이용
 		function fn_imgBoard(){
 			$('.imgBoard').click(function(){
@@ -44,8 +33,24 @@
 				}
 			});
 		}
-		
-	
+		// 로그인(login)
+		function fn_login(){
+			$('#f').submit(function(e){
+				if($('#id').val() == '' || $('#pw').val() == ''){
+					alert('아이디와 비밀번호는 필수입니다.');
+					e.preventDefault();
+					$('#id').focus();
+					return false;
+				} /* else if($('#id').val() != '${loginUser.id}' && $('#pw').val() != '${loginUser.pw}'){
+					alert('아이디와 비밀번호를 확인해주세요.');
+					e.preventDefault();
+					$('#id').focus();
+					return false;
+				} else{
+					return true;
+				} */
+			});
+		}
 	</script>
 	<style>
 		.menu{
@@ -54,7 +59,7 @@
 			display: flex;
 			justify-content: space-between;
 		}
-		.board2{
+		.board1{
 			border: none;
 			padding: 5px;
 			text-align: center;
@@ -88,25 +93,24 @@
 		#f button:hover {
 			cursor: pointer;
 		}
-		.info{
+		.joinAndFind{
 			width: 250px;
 			margin: 0 auto;
 			display: flex;
 			justify-content: space-between;
 		}
-		.info > a{
+		.joinAndFind > a{
 			text-decoration: none;
 			font-size: 14px;
 			text-align: center;
 		}
 	</style>
-</head>
 <body>
 
 	<!-- 메뉴 -->
 	<div class="menu">
-		<input type="button" class="imgBoard board2" value="갤러리 게시판">
-		<input type="button" class="board board2" value="자유 게시판">
+		<input type="button" class="imgBoard board1" value="갤러리 게시판">
+		<input type="button" class="board board1" value="자유 게시판">
 	</div>
 	
 	<!-- 로그인 화면 -->
@@ -119,12 +123,11 @@
 	</div>
 	
 	<!-- 회원가입, 아이디&비번 찾기 -->
-	<div class="info">
+	<div class="joinAndFind">
 		<a href="joinPage.do">회원가입</a>
 		<a href="findIdPage.do">아이디 찾기</a>
 		<a href="findPwPage.do">비밀번호 찾기</a>
 	</div>
-	
+
 </body>
 </html>
-
