@@ -14,8 +14,9 @@
 			fn_update();
 			fn_presentPwCheck();
 			fn_updatePw();
+			fn_delete();
 		});
-		// 회원 정보(이름, 전화번호, 주소)
+		// 회원 정보 변경(이름, 전화번호, 주소)
 		function fn_update(){
 			$('#update_btn').click(function(){
 				if(confirm('수정하시겠습니까?')){
@@ -67,6 +68,14 @@
 				}
 			});
 		}
+		// 회원 탈퇴
+		function fn_delete(){
+			$('#delete_btn').click(function(){
+				if (confirm('탈퇴하시겠습니까?')) {
+					location.href = 'deleteMember.do?no=${loginUser.no}';					
+				}
+			});
+		}
 	</script>
 	<style>
 		.menu2{
@@ -110,7 +119,7 @@
 			<input type="button" class="board2" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
 			<input type="button" class="board2" value="자유 게시판">
 			<input type="button" class="board2" value="로그아웃" onclick="location.href='logout.do'">
-			<input type="button" class="board2" value="회원탈퇴">
+			<input type="button" class="board2" value="회원탈퇴" id="delete_btn">
 		</div>
 		
 		<div class="myPage_form">
@@ -148,6 +157,15 @@
 			</form>
 		</div>
 		
+	</c:if>
+	<!--  유저가 없는경우  -->
+	<c:if test="${loginUser == null}">
+	<script type="text/javascript">
+	
+		alert('아이디와 비밀번호를 확인해주세요');
+		history.back();
+	
+	</script>
 	</c:if>
 	
 </body>

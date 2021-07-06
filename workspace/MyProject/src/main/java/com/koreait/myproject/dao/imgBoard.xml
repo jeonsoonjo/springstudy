@@ -5,11 +5,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.koreait.myproject.dao.ImgBoardDAO">
 
-	<select id="selectImgBoardList" resultType="com.koreait.myproject.dto.ImgBoardDTO">
-		SELECT IDX, WRITER, TITLE, CONTENT, FILENAME, IP, HIT, POSTDATE, LASTMODIFIED
+	<!-- 전체 게시글 개수  -->
+	<select id="getTotalImgBoardCount" resultType="int">
+		SELECT COUNT(*)
 		  FROM IMGBOARD
-		 ORDER BY IDX DESC
 	</select>
+	
+	<!-- 조회수 -->
+	<update id="updateHit">
+		UPDATE IMGBOARD
+		   SET HIT = #{hit + 1}
+		 WHERE IDX = #{idx}
+	</update>
+	
+	<!-- 게시판 목록 -->
+	<select id="selectImgBoardList" resultType="com.koreait.myproject.dto.ImgBoardDTO">
+		SELECT IDX, TITLE, WRITER, CONTENT, FILENAME, IP, HIT, POSTDATE, LASTMODIFIED
+		  FROM IMGBOARD
+		 ORDER BY HIT DESC
+	</select>
+	
+	<!-- 게시글 반환 -->
+	<select id="selectImgBoardByIdx" resultType="com.koreait.myproject.dto.ImgBoardDTO">
+		SELECT IDX, TITLE, WRITER, CONTENT, FILENAME, IP, HIT, POSTDATE, LASTMODIFIED
+		  FROM IMGBOARD
+		 WHERE IDX = #{idx}
+	</select>
+	
+	<!-- 게시판 글 등록 -->
+	<insert id="insertImgBoard">
+		INSERT INTO IMGBOARD
+		VALUES (IMGBOARD_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{filename}, #{ip}, #{hit}, SYSDATE, SYSDATE)
+	</insert>
+
+
+
+
+
+
+
+
+
 
 
 

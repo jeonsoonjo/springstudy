@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,29 +11,8 @@
 	<script type="text/javascript">
 		// 페이지 로드
 		$(document).ready(function(){
-			fn_imgBoard();
-			fn_board();
 			fn_login();
 		});
-		// 회원만 게시판 이용
-		function fn_imgBoard(){
-			$('.imgBoard').click(function(){
-				if($('#id').val() == '' || $('#pw').val() == ''){
-					alert('로그인 후 이용하실 수 있습니다.');
-					e.preventDefault();
-					return false;
-				}
-			});
-		}
-		function fn_board(){
-			$('.board').click(function(){
-				if($('#id').val() == '' || $('#pw').val() == ''){
-					alert('로그인 후 이용하실 수 있습니다.');
-					e.preventDefault();
-					return false;
-				}
-			});
-		}
 		// 로그인(login)
 		function fn_login(){
 			$('#f').submit(function(e){
@@ -41,14 +21,7 @@
 					e.preventDefault();
 					$('#id').focus();
 					return false;
-				} /* else if($('#id').val() != '${loginUser.id}' && $('#pw').val() != '${loginUser.pw}'){
-					alert('아이디와 비밀번호를 확인해주세요.');
-					e.preventDefault();
-					$('#id').focus();
-					return false;
-				} else{
-					return true;
-				} */
+				}
 			});
 		}
 	</script>
@@ -108,26 +81,33 @@
 <body>
 
 	<!-- 메뉴 -->
-	<div class="menu">
-		<input type="button" class="imgBoard board1" value="갤러리 게시판">
-		<input type="button" class="board board1" value="자유 게시판">
-	</div>
+	<c:if test="${loginUser == null}">
+		<div class="menu">
+			<input type="button" class="imgBoard board1" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
+			<input type="button" class="board board1" value="자유 게시판"  onclick="">
+		</div>
+		
+		<!-- 로그인 화면 -->
+		<div class="login_form">
+			<form id="f" action="login.do" method="post">
+				<input type="text" name="id" id="id" placeholder="ID">
+				<input type="password" name="pw" id="pw" placeholder="Password">
+				<button>로그인</button>
+			</form>
+		</div>
+		
+		<!-- 회원가입, 아이디&비번 찾기 -->
+		<div class="joinAndFind">
+			<a href="joinPage.do">회원가입</a>
+			<a href="findIdPage.do">아이디 찾기</a>
+			<a href="findPwPage.do">비밀번호 찾기</a>
+		</div>
+	</c:if>
 	
-	<!-- 로그인 화면 -->
-	<div class="login_form">
-		<form id="f" action="login.do" method="post">
-			<input type="text" name="id" id="id" placeholder="ID">
-			<input type="password" name="pw" id="pw" placeholder="Password">
-			<button>로그인</button>
-		</form>
-	</div>
-	
-	<!-- 회원가입, 아이디&비번 찾기 -->
-	<div class="joinAndFind">
-		<a href="joinPage.do">회원가입</a>
-		<a href="findIdPage.do">아이디 찾기</a>
-		<a href="findPwPage.do">비밀번호 찾기</a>
-	</div>
+	<c:if test="${loginUser != null}">
+		
+		${loginUser.id} 님 반갑습니다<br><br>
+	</c:if>
 
 </body>
 </html>

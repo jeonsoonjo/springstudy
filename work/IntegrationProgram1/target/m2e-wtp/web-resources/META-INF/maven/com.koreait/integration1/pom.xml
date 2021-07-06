@@ -3,8 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.koreait</groupId>
+<<<<<<< HEAD:work/IntegrationProgram1/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/integration1/pom.xml
 	<artifactId>integration1</artifactId>
 	<name>IntegrationProgram1</name>
+=======
+	<artifactId>myproject</artifactId>
+	<name>MyProject</name>
+>>>>>>> 28c4d472b918f725da129884c20222bf2daaf8be:workspace/MyProject/Users/soonjo/Downloads/springstudy-main/workspace/MyProject/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/myproject/pom.xml
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
@@ -16,8 +21,13 @@
 	</properties>
 	
 	<dependencies>
+<<<<<<< HEAD:work/IntegrationProgram1/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/integration1/pom.xml
 		
 		<!-- HikariCP(DBCP)  -->
+=======
+	
+		<!-- Hikari(DBCP) -->
+>>>>>>> 28c4d472b918f725da129884c20222bf2daaf8be:workspace/MyProject/Users/soonjo/Downloads/springstudy-main/workspace/MyProject/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/myproject/pom.xml
 		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 		<dependency>
     			<groupId>com.zaxxer</groupId>
@@ -44,6 +54,17 @@
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+<<<<<<< HEAD:work/IntegrationProgram1/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/integration1/pom.xml
+=======
+		
+		<!-- BeanConfiguration.java -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2.2</version>
+		</dependency>
+>>>>>>> 28c4d472b918f725da129884c20222bf2daaf8be:workspace/MyProject/Users/soonjo/Downloads/springstudy-main/workspace/MyProject/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/myproject/pom.xml
 		
 		<!-- json과 bean 상호변환 -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
@@ -61,13 +82,54 @@
     			<version>20180813</version>
 		</dependency>
 		
-		<!-- quartz 배치 프로그램 -->
-		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<!-- lombok -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-		    <groupId>org.quartz-scheduler</groupId>
-		    <artifactId>quartz</artifactId>
-		    <version>2.3.0</version>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.4</version>
+		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- 파일 업로드 및 다운로드 -->
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.3</version>
+		</dependency>
+<<<<<<< HEAD:work/IntegrationProgram1/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/integration1/pom.xml
+=======
+		
+		<!-- 이메일 인증 디펜던시 2개: javax.mail과 spring context support -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		<!-- spring version으로 맞추기 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+	
+		<!-- 암호화 처리 -->
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.15</version>
+		</dependency>
+>>>>>>> 28c4d472b918f725da129884c20222bf2daaf8be:workspace/MyProject/Users/soonjo/Downloads/springstudy-main/workspace/MyProject/target/m2e-wtp/web-resources/META-INF/maven/com.koreait/myproject/pom.xml
 	
 		<!-- Spring -->
 		<dependency>

@@ -20,8 +20,7 @@
 					return false;
 				}
 			});
-		}
-		
+		} 
 		function fn_leave(){
 			$('#leave_link').click(function(){
 				if(confirm('탈퇴할까요?')){

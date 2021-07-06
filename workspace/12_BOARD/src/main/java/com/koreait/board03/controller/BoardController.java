@@ -50,7 +50,6 @@ public class BoardController {
 		return "index";
 	}
 
-
 	@GetMapping(value="selectBoardList.do")
 	public String selectBoardList(Model model) {
 		selectBoardListCommand.execute(sqlSession, model);

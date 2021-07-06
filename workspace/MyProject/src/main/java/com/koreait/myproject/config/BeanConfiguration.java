@@ -8,8 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.koreait.myproject.command.imgBoard.InsertImgBoardCommand;
+import com.koreait.myproject.command.imgBoard.SelectImgBoardListCommand;
+import com.koreait.myproject.command.member.DeleteMemberCommand;
 import com.koreait.myproject.command.member.EmailAuthCommand;
 import com.koreait.myproject.command.member.EmailCheckCommand;
+import com.koreait.myproject.command.member.FindIdCommand;
+import com.koreait.myproject.command.member.FindPwCommand;
 import com.koreait.myproject.command.member.IdCheckCommand;
 import com.koreait.myproject.command.member.JoinCommand;
 import com.koreait.myproject.command.member.LoginCommand;
@@ -58,10 +63,14 @@ public class BeanConfiguration {
 		multipartResolver.setMaxUploadSize(1024 * 1024 * 10); // Byte 단위(10MB)
 		return multipartResolver;
 	}
-
+	// 회원(member)
 	@Bean
 	public LoginCommand loginCommand() {
 		return new LoginCommand();
+	}
+	@Bean
+	public LogoutCommand logoutCommand() {
+		return new LogoutCommand();
 	}
 	@Bean
 	public IdCheckCommand idCheckCommand() {
@@ -92,11 +101,40 @@ public class BeanConfiguration {
 		return new UpdateMemberCommand();
 	}
 	@Bean
-	public LogoutCommand logoutCommand() {
-		return new LogoutCommand();
+	public DeleteMemberCommand deleteMemberCommand() {
+		return new DeleteMemberCommand();
+	}
+	@Bean
+	public FindIdCommand findIdCommand() {
+		return new FindIdCommand();
+	}
+	@Bean
+	public FindPwCommand findPwCommand() {
+		return new FindPwCommand();
 	}
 	
-
+	// 이미지 게시판(imgBoard)
+	@Bean
+	public SelectImgBoardListCommand selectImgBoardListCommand() {
+		return new SelectImgBoardListCommand();
+	}
+	@Bean
+	public InsertImgBoardCommand insertImgBoardCommand() {
+		return new InsertImgBoardCommand();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

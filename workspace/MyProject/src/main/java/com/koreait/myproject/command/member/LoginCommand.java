@@ -18,7 +18,7 @@ public class LoginCommand implements MemberCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
+	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
@@ -28,11 +28,12 @@ public class LoginCommand implements MemberCommand {
 		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
 		MemberDTO loginUser = memberDAO.login(memberDTO);
-		
+		memberDAO.loginLog(memberDTO); // 로그인 기록
+
 		if(loginUser != null) {
 			request.getSession().setAttribute("loginUser", loginUser);
 		}
-
+		
 	}
 
 }

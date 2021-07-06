@@ -32,7 +32,7 @@ public class UpdateMemberCommand implements MemberCommand {
 		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
 		int count = memberDAO.updateMember(memberDTO);
-		
+
 		if(count > 0) {
 			HttpSession session = request.getSession();
 			MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");

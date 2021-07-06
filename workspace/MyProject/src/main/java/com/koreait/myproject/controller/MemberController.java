@@ -1,8 +1,10 @@
 package com.koreait.myproject.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreait.myproject.command.member.DeleteMemberCommand;
 import com.koreait.myproject.command.member.EmailAuthCommand;
 import com.koreait.myproject.command.member.EmailCheckCommand;
+import com.koreait.myproject.command.member.FindIdCommand;
+import com.koreait.myproject.command.member.FindPwCommand;
 import com.koreait.myproject.command.member.IdCheckCommand;
 import com.koreait.myproject.command.member.JoinCommand;
 import com.koreait.myproject.command.member.LoginCommand;
@@ -31,6 +37,7 @@ public class MemberController {
 	// field
 	private SqlSession sqlSession;
 	private LoginCommand loginCommand;
+	private LogoutCommand logoutCommand;
 	private IdCheckCommand idCheckCommand;
 	private EmailCheckCommand emailCheckCommand;
 	private EmailAuthCommand emailAuthCommand;
@@ -38,7 +45,9 @@ public class MemberController {
 	private PresentPwCheckCommand presentPwCheckCommand;
 	private UpdatePwCommand updatePwCommand;
 	private UpdateMemberCommand updateMemberCommand;
-	private LogoutCommand logoutCommand;
+	private DeleteMemberCommand deleteMemberCommand;
+	private FindIdCommand findIdCommand;
+	private FindPwCommand findPwCommand;
 	
 	// constructor
 	@Autowired
@@ -51,7 +60,10 @@ public class MemberController {
 							PresentPwCheckCommand presentPwCheckCommand,
 							UpdatePwCommand updatePwCommand,
 							UpdateMemberCommand updateMemberCommand,
-							LogoutCommand logoutCommand) {
+							LogoutCommand logoutCommand,
+							DeleteMemberCommand deleteMemberCommand,
+							FindIdCommand findIdCommand,
+							FindPwCommand findPwCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.loginCommand = loginCommand;
@@ -63,6 +75,9 @@ public class MemberController {
 		this.updatePwCommand = updatePwCommand;
 		this.updateMemberCommand = updateMemberCommand;
 		this.logoutCommand = logoutCommand;
+		this.deleteMemberCommand = deleteMemberCommand;
+		this.findIdCommand = findIdCommand;
+		this.findPwCommand = findPwCommand;
 		
 	}
 	
@@ -72,10 +87,17 @@ public class MemberController {
 	}
 	// 로그인(login)
 	@PostMapping(value="login.do")
-	public String login(HttpServletRequest request, Model model) {
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		model.addAttribute("request", request);
 		loginCommand.execute(sqlSession, model);
-		return "member/myPage";
+		return "member/myPage";		
+	}
+	// 로그아웃(logout)
+	@GetMapping(value="logout.do")
+	public String logout(HttpSession session, Model model) {
+		model.addAttribute("session", session);
+		logoutCommand.execute(sqlSession, model);
+		return "redirect:/";
 	}
 	// joinPage 단순이동
 	@GetMapping(value="joinPage.do")
@@ -117,38 +139,57 @@ public class MemberController {
 		model.addAttribute("session", session);
 		model.addAttribute("memberDTO", memberDTO);
 		return presentPwCheckCommand.execute(sqlSession, model); // sqlSession 있어도 되고 없어도 됨
-}
+	}
 	// 비밀번호 변경(updatePw)
 	@PostMapping(value="updatePw.do")
 	public String updatePw(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		updatePwCommand.execute(sqlSession, model);
-		return index();
+		return "member/myPage";		
 	}
 	// 회원 정보 변경(이름, 전화번호, 주소)
 	@PostMapping(value="updateMember.do")
 	public String updateMember(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		updateMemberCommand.execute(sqlSession, model);
-		return index();
+		return "member/myPage";		
 	}
-	// 로그아웃(logout)
-	@GetMapping(value="logout.do")
-	public String logout(HttpSession session, Model model) {
-		model.addAttribute("session", session);
-		logoutCommand.execute(sqlSession, model);
+	// 회원탈퇴(deleteMember)
+	@GetMapping(value="deleteMember.do")
+	public String deleteMember(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		deleteMemberCommand.execute(sqlSession, model);
+		return "redirect:/";	
+	}
+	// findIdPage 단순이동
+	@GetMapping(value="findIdPage.do")
+	public String findIdPage() {
+		return "member/findId";
+	}
+	// 아이디 찾기(findId)
+	@PostMapping(value="findId.do")
+	public String findId(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		findIdCommand.execute(sqlSession, model);
+		return "member/findIdResult";
+	}
+	// findPwPage 단순이동
+	@GetMapping(value="findPwPage.do")
+	public String findPwPage() {
+		return "member/findPw";
+	}
+	// changePw 단순이동
+	@GetMapping(value="changePwPage.do") // 파라미터를 가지고 이동
+	public String changePwPage(@ModelAttribute("email") String email) {
+		return "member/changePw";
+	}
+	// 비밀번호 찾기&변경(changePw)
+	@PostMapping(value="changePw.do")
+	public String changePw(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		findPwCommand.execute(sqlSession, model);
 		return "redirect:/";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
 

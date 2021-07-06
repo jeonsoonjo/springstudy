@@ -11,7 +11,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM MEMBER
 		 WHERE ID = #{id}
 		   AND PW = #{pw}
+		   AND STATE NOT IN(-1)
 	</select>
+	
+	<!-- 로그인 기록 남기기  -->
+	<insert id="loginLog">
+		INSERT INTO MEMBER_LOG
+		VALUES (MEMBER_LOG_SEQ.NEXTVAL, #{id}, SYSDATE, NULL)
+	</insert>
+	
+	<!-- 로그아웃 기록 남기기  -->
+	<insert id="logoutLog">
+		INSERT INTO MEMBER_LOG
+		VALUES (MEMBER_LOG_SEQ.NEXTVAL, #{id}, NULL, SYSDATE)
+	</insert>
 	
 	<!-- 아이디 체크 -->
 	<select id="idCheck" resultType="int">
@@ -49,9 +62,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE NO = #{no}
 	</update>
 
-	<!-- 로그아웃 -->
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember">
+		UPDATE MEMBER
+		   SET STATE = -1
+		 WHERE NO = #{no}
+	</update>
 	
-
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="com.koreait.myproject.dto.MemberDTO">
+		SELECT ID, REGDATE
+		  FROM MEMBER
+		 WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<update id="changePw">
+		UPDATE MEMBER
+		   SET PW = #{pw}
+		 WHERE EMAIL = #{email}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </mapper>

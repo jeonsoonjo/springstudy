@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.koreait.myproject.dao.MemberDAO;
+import com.koreait.myproject.dto.MemberDTO;
+
 public class LogoutCommand implements MemberCommand {
 
 	@Override
@@ -14,6 +17,12 @@ public class LogoutCommand implements MemberCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpSession session = (HttpSession)map.get("session");
+		String id = ((MemberDTO)session.getAttribute("loginUser")).getId();
+		
+		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId(id);
+		memberDAO.logoutLog(memberDTO); // 로그아웃 기록
 		
 		if(session.getAttribute("loginUser") != null) {
 			session.invalidate();

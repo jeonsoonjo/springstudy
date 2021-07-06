@@ -86,7 +86,7 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="idCheck.do",
-			produces="application/json; charset=utf-8")
+				produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Map<String, Integer> idCheck(HttpServletRequest request,
 						  				Model model) {
@@ -95,7 +95,7 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="verifyNum.do",
-			produces="application/json; charset=utf-8")
+				produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Map<String, String> verifyNum(HttpServletRequest request, 
 						  				 Model model) {
