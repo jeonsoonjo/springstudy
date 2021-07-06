@@ -10,7 +10,6 @@
 		// 페이지 로드
 		$(document).ready(function(){
 			fn_email_code();
-			fn_email_auth();
 		})
 		// 이메일 인증코드 받기 : email_code
 		function fn_email_code(){

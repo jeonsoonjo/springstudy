@@ -81,7 +81,7 @@
 <body>
 
 	<!-- 메뉴 -->
-	<c:if test="${loginUser == null}">
+
 		<div class="menu">
 			<input type="button" class="imgBoard board1" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
 			<input type="button" class="board board1" value="자유 게시판"  onclick="">
@@ -102,12 +102,8 @@
 			<a href="findIdPage.do">아이디 찾기</a>
 			<a href="findPwPage.do">비밀번호 찾기</a>
 		</div>
-	</c:if>
-	
-	<c:if test="${loginUser != null}">
-		
-		${loginUser.id} 님 반갑습니다<br><br>
-	</c:if>
+
+
 
 </body>
 </html>

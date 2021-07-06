@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreait.myproject.command.imgBoard.InsertImgBoardCommand;
+import com.koreait.myproject.command.imgBoard.SelectImgBoardByIdxCommand;
 import com.koreait.myproject.command.imgBoard.SelectImgBoardListCommand;
 
 @Controller
@@ -19,29 +20,34 @@ public class ImgBoardController {
 	// field
 	private SqlSession sqlSession;
 	private SelectImgBoardListCommand selectImgBoardListCommand;
+	private SelectImgBoardByIdxCommand selectImgBoardByIdxCommand;
 	private InsertImgBoardCommand insertImgBoardCommand;
 	
 	// constructor
 	@Autowired
 	public ImgBoardController(SqlSession sqlSession,
 							  SelectImgBoardListCommand selectImgBoardListCommand,
-							  InsertImgBoardCommand insertImgBoardCommand) {
+							  InsertImgBoardCommand insertImgBoardCommand,
+							  SelectImgBoardByIdxCommand selectImgBoardByIdxCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.selectImgBoardListCommand = selectImgBoardListCommand;
 		this.insertImgBoardCommand = insertImgBoardCommand;
+		this.selectImgBoardByIdxCommand = selectImgBoardByIdxCommand;
 	}
-	/*// selectImgBoardListPage 단순이동
-	@GetMapping(value="selectImgBoardListPage.do")
-	public String selectImgBoardListPage() {
-		return "imgBoard/listImgBoard";
-	}*/
 	// 이미지 게시판 목록(selectImgBoardList)
 	@GetMapping(value="selectImgBoardList.do")
 	public String selectImgBoardList(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		selectImgBoardListCommand.execute(sqlSession, model);
 		return "imgBoard/listImgBoard"; 
+	}
+	// 게시글 반환(selectImgBoardByIdx)
+	@GetMapping(value="selectImgBoardByIdx.do")
+	public String selectImgBoardByIdx(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		selectImgBoardByIdxCommand.execute(sqlSession, model);
+		return "imgBoard/viewImgBoard";  // board/view.jsp로 포워드
 	}
 	// insertImgBoardPage 단순이동
 	@GetMapping(value="insertImgBoardPage.do") // 단순이동

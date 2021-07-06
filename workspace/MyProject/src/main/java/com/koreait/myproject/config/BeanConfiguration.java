@@ -9,6 +9,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.koreait.myproject.command.imgBoard.InsertImgBoardCommand;
+import com.koreait.myproject.command.imgBoard.SelectImgBoardByIdxCommand;
 import com.koreait.myproject.command.imgBoard.SelectImgBoardListCommand;
 import com.koreait.myproject.command.member.DeleteMemberCommand;
 import com.koreait.myproject.command.member.EmailAuthCommand;
@@ -117,6 +118,10 @@ public class BeanConfiguration {
 	@Bean
 	public SelectImgBoardListCommand selectImgBoardListCommand() {
 		return new SelectImgBoardListCommand();
+	}
+	@Bean
+	public SelectImgBoardByIdxCommand SelectImgBoardByIdxCommand() {
+		return new SelectImgBoardByIdxCommand();
 	}
 	@Bean
 	public InsertImgBoardCommand insertImgBoardCommand() {

@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.koreait.myproject.dao.ImgBoardDAO">
 
 	<!-- 전체 게시글 개수  -->
-	<select id="getTotalImgBoardCount" resultType="int">
+	<select id="getTotalRecord" resultType="int">
 		SELECT COUNT(*)
 		  FROM IMGBOARD
 	</select>
@@ -20,9 +20,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시판 목록 -->
 	<select id="selectImgBoardList" resultType="com.koreait.myproject.dto.ImgBoardDTO">
-		SELECT IDX, TITLE, WRITER, CONTENT, FILENAME, IP, HIT, POSTDATE, LASTMODIFIED
-		  FROM IMGBOARD
-		 ORDER BY HIT DESC
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT WRITER
+		  		  			 , TITLE
+		  		  			 , CONTENT
+		  		  			 , FILENAME
+		  		  			 , IP
+		  		  			 , HIT
+		  		  			 , POSTDATE
+		  		  			 , LASTMODIFIED
+		  		  		  FROM IMGBOARD
+		  		  		 ORDER BY HIT DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
 	</select>
 	
 	<!-- 게시글 반환 -->
