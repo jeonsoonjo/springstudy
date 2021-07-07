@@ -153,7 +153,6 @@
 					   alert('가입내용을 입력하세요.');
 					   return false;
 				} else {
-					alert('회원가입이 완료 되었습니다! 로그인하세요.');
 					$('#f').attr('action', 'join.do');
 					$('#f').submit();
 				}

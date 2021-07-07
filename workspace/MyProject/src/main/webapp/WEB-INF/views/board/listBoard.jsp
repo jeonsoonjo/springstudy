@@ -10,19 +10,18 @@
 </head>
 <body>
 
-	<h3>이미지 게시판</h3>
+	<h3>자유 게시판</h3>
 	
-	<!-- 검색화면 -->
-	<form id="f" method="get">
-		<select name="column" id="column">
-			<option value="TITLE" data-name="title">제목</option>
-			<option value="CONTENT" data-name="content">내용</option>
-			<option value="WRITER" data-name="writer">작성자</option>
+	<!-- 검색 -->
+	<form action="findImgBoard.do">
+		<select name="column">
+			<option value="TITLE">제목</option>
+			<option value="CONTENT">내용</option>
+			<option value="WRITER">작성자</option>
 		</select>
-		
 		<input type="text" name="query">
 		<button>검색</button>
-		<input type="button" value="전체목록보기" onclick="location.href='selectImgBoardList.do'">
+		<input type="button" value="전체목록보기" onclick="location.href='selectBoardList.do'">
 		<c:if test="${loginUser != null}">
 			<input type="button" value="돌아가기" onclick="location.href='myPage.do'">
 		</c:if>
@@ -36,7 +35,7 @@
 	전체: ${totalRecord}개 게시글
 	<!-- 로그인을 해야 작성할 수 있다 -->
 	<c:if test="${loginUser != null}">
-		<input type="button" value="게시글 작성하기" onclick="location.href='insertImgBoardPage.do'">
+		<input type="button" value="게시글 작성하기" onclick="location.href='insertBoardPage.do'">
 	</c:if>
 	<br><br>
 	
@@ -47,41 +46,43 @@
 				<td>제목</td>
 				<td>작성자</td>
 				<td>조회수</td>
-				<td>첨부파일</td>
 				<td>작성일</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:if test="${empty imgList}">
+			<c:if test="${empty list}">
 				<tr>
-					<td colspan="6">작성된 게시글이 없습니다.</td>
+					<td colspan="5">작성된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
 			
-			<c:if test="${not empty imgList}">
-				<c:forEach var="imgBoard" items="${imgList}">
+			<c:if test="${not empty list}">
+				<c:forEach var="board" items="${list}" varStatus="k">
 					<tr>
-						<td>${imgBoard.idx}</td>
-						<td><a href="selectImgBoardByIdx.do?idx=${imgBoard.idx}">${imgBoard.title}</a></td>
-						<td>${imgBoard.writer}</td>	
-						<td>${imgBoard.hit}</td>	
+						<td>${seq - k.index}</td>
 						<td>
-							<c:if test="${not empty imgBoard.save_filename}">
-								<a href="download.do?filename=${imgBoard.seve_filename}"><i class="fas fa-paperclip"></i></a>
+							<c:if test="${board.depth == 1}">
+								&nbsp;&nbsp;&nbsp;[re]
 							</c:if>
-						</td>		
-						<td>${imgBoard.postdate}</td>
+							${board.title}
+							<c:if test="${board.depth == 0}">
+								<font size="1"><a class="link" href="insertReplyPage.do?groupno=${board.groupno}">답글</a></font>
+							</c:if>
+						</td>
+						<td>${board.writer}</td>
+						<td>${board.lastmodified}</td>
+						<td>${board.hit}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
-		<%-- <tfoot>
+		<tfoot>
 			<tr>
 				<td colspan="6">
 					${paging}
 				</td>
 			</tr>
-		</tfoot> --%>
+		</tfoot>
 	</table>
 	
 </body>

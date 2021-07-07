@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import com.koreait.myproject.dao.ImgBoardDAO;
 
 
-public class SelectImgBoardByIdxCommand implements ImgBoardCommand {
+public class SelectImgBoardViewCommand implements ImgBoardCommand {
 
 	@Override
 	public void execute(SqlSession sqlSession, Model model) {

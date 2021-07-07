@@ -28,7 +28,7 @@
 </head>
 <body>
 
-	<h1>아이디 찾기</h1>
+	<h3>아이디 찾기</h3>
 	
 	<form id="f" method="post">
 		가입 당시 이메일을 입력하세요.<br>

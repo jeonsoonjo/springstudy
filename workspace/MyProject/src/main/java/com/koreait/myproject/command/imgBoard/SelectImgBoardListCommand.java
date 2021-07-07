@@ -1,25 +1,19 @@
 package com.koreait.myproject.command.imgBoard;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.koreait.myproject.dao.ImgBoardDAO;
-import com.koreait.myproject.dto.ImgBoardDTO;
-import com.koreait.myproject.dto.PageDTO;
-import com.koreait.myproject.util.PagingUtils;
+
 
 public class SelectImgBoardListCommand implements ImgBoardCommand {
 
 	@Override
 	public void execute(SqlSession sqlSession, Model model) {
 		
-		Map<String, Object> map = model.asMap();
+		/*Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
 		Optional<String> opt = Optional.ofNullable(request.getParameter("page"));
@@ -30,12 +24,15 @@ public class SelectImgBoardListCommand implements ImgBoardCommand {
 		
 		PageDTO pageDTO = PagingUtils.getPage(totalRecord, page);
 		
-		List<ImgBoardDTO> imgList = imgBoardDAO.selectImgBoardList(pageDTO);
-		String paging = PagingUtils.getPaging("searchAll.do", page);
+		List<ImgBoardDTO> imgList = imgBoardDAO.selectImgBoardList();
+		String paging = PagingUtils.getPaging("selectImgBoardList.do", page);
 		
 		model.addAttribute("imgList", imgList);
 		model.addAttribute("paging", paging);
-		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("totalRecord", totalRecord);*/
+		
+		ImgBoardDAO imgBoardDAO = sqlSession.getMapper(ImgBoardDAO.class);
+		model.addAttribute("imgList", imgBoardDAO.selectImgBoardList());
 		
 	}
 		

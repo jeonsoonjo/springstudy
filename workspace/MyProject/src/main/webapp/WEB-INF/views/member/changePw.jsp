@@ -32,7 +32,7 @@
 </head>
 <body>
 
-	<h1>비밀번호 변경</h1>
+	<h3>비밀번호 변경</h3>
 	
 	<form id="f" method="post">
 		<input type="hidden" name="email" value="${email}">

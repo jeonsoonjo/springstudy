@@ -79,12 +79,12 @@
 		}
 	</style>
 <body>
-
-	<!-- 메뉴 -->
-
+	
+	<c:if test="${loginUser == null}">
+		<!-- 메뉴 -->
 		<div class="menu">
 			<input type="button" class="imgBoard board1" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
-			<input type="button" class="board board1" value="자유 게시판"  onclick="">
+			<input type="button" class="board board1" value="자유 게시판"  onclick="location.href='selectBoardList.do'">
 		</div>
 		
 		<!-- 로그인 화면 -->
@@ -102,8 +102,7 @@
 			<a href="findIdPage.do">아이디 찾기</a>
 			<a href="findPwPage.do">비밀번호 찾기</a>
 		</div>
-
-
+	</c:if>
 
 </body>
 </html>

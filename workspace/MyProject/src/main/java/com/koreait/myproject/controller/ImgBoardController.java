@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreait.myproject.command.imgBoard.InsertImgBoardCommand;
-import com.koreait.myproject.command.imgBoard.SelectImgBoardByIdxCommand;
 import com.koreait.myproject.command.imgBoard.SelectImgBoardListCommand;
+import com.koreait.myproject.command.imgBoard.SelectImgBoardViewCommand;
+import com.koreait.myproject.command.imgBoard.UpdateImgBoardCommand;
 
 @Controller
 public class ImgBoardController {
@@ -20,21 +21,25 @@ public class ImgBoardController {
 	// field
 	private SqlSession sqlSession;
 	private SelectImgBoardListCommand selectImgBoardListCommand;
-	private SelectImgBoardByIdxCommand selectImgBoardByIdxCommand;
+	private SelectImgBoardViewCommand selectImgBoardViewCommand;
 	private InsertImgBoardCommand insertImgBoardCommand;
+	private UpdateImgBoardCommand updateImgBoardCommand;
 	
 	// constructor
 	@Autowired
 	public ImgBoardController(SqlSession sqlSession,
 							  SelectImgBoardListCommand selectImgBoardListCommand,
+							  SelectImgBoardViewCommand selectImgBoardViewCommand,
 							  InsertImgBoardCommand insertImgBoardCommand,
-							  SelectImgBoardByIdxCommand selectImgBoardByIdxCommand) {
+							  UpdateImgBoardCommand updateImgBoardCommand) {
 		super();
 		this.sqlSession = sqlSession;
 		this.selectImgBoardListCommand = selectImgBoardListCommand;
+		this.selectImgBoardViewCommand = selectImgBoardViewCommand;
 		this.insertImgBoardCommand = insertImgBoardCommand;
-		this.selectImgBoardByIdxCommand = selectImgBoardByIdxCommand;
+		this.updateImgBoardCommand = updateImgBoardCommand;
 	}
+	
 	// 이미지 게시판 목록(selectImgBoardList)
 	@GetMapping(value="selectImgBoardList.do")
 	public String selectImgBoardList(HttpServletRequest request, Model model) {
@@ -46,8 +51,8 @@ public class ImgBoardController {
 	@GetMapping(value="selectImgBoardByIdx.do")
 	public String selectImgBoardByIdx(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
-		selectImgBoardByIdxCommand.execute(sqlSession, model);
-		return "imgBoard/viewImgBoard";  // board/view.jsp로 포워드
+		selectImgBoardViewCommand.execute(sqlSession, model);
+		return "imgBoard/viewImgBoard";
 	}
 	// insertImgBoardPage 단순이동
 	@GetMapping(value="insertImgBoardPage.do") // 단순이동
@@ -59,10 +64,15 @@ public class ImgBoardController {
 	public String insertImgBoard(MultipartHttpServletRequest multipartRequest, Model model) {
 		model.addAttribute("multipartRequest", multipartRequest);
 		insertImgBoardCommand.execute(sqlSession, model);
-		return "redirect:selectImgBoardList.do";
+		return "redirect:selectImgBoardList.do"; 
 	}
-	
-	
+	// 게시글 수정(updateImgBoard)
+	@PostMapping(value="updateImgBoard.do")
+	public String updateBoard(MultipartHttpServletRequest multipartRequest, Model model) {
+		model.addAttribute("multipartRequest", multipartRequest);
+		updateImgBoardCommand.execute(sqlSession, model);
+		return "redirect:selectImgBoardByIdx.do?idx=" + multipartRequest.getParameter("idx");
+	}
 	
 	
 	

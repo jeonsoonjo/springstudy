@@ -10,7 +10,8 @@ public class ImgBoardDTO {
 	private String writer; // 작성자
 	private String title; // 제목
 	private String content; // 내용
-	private String filename; // 이미지 파일명
+	private String origin_filename; // 원래 파일명
+	private String save_filename; // 저장된 파일명
 	private String ip; // 작성자 ip
 	private int hit; // 조회수
 	private Date postdate; // 작성일

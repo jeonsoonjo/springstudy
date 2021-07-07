@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.koreait.myproject.dao.BoardDAO">
+
+	<!-- 전체 게시글 개수  -->
+	<select id="getTotalRecord" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
+	
+	<!-- 게시판 목록 -->
+	<select id="selectBoardList" resultType="com.koreait.myproject.dto.BoardDTO">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		  		  FROM (SELECT *
+		  		  		  FROM BOARD
+		  		  		 ORDER BY GROUPNO DESC, DEPTH ASC, GROUPORD DESC) A) B
+		 WHERE B.RN BETWEEN #{beginRecord} AND #{endRecord}
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertBoard">
+		INSERT INTO BOARD
+		VALUES (BOARD_SEQ.NEXTVAL,
+				#{writer}, <!-- 작성자 -->
+				#{title}, <!-- 제목 -->
+				#{content}, <!-- 내용 -->
+				#{ip}, <!-- 작성자 ip -->
+				0, <!-- 조회수 --><!-- 조회수는 getter로 뺄 필요가 없다 -->
+				SYSDATE, <!-- 작성일 -->
+				SYSDATE, <!-- 최종수정일 -->
+				0, <!-- 상태(정상: 0, 삭제: -1) -->
+				BOARD_SEQ.CURRVAL, <!-- 그룹번호 = 게시글번호 -->
+				0, <!-- group order --><!-- 같은 그룹 내 순서를 정하는 순번 -->
+				0 <!-- depth --><!-- 게시글(0)/댓글(1 이상) 구분 -->
+		)
+	</insert>
+	
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
+

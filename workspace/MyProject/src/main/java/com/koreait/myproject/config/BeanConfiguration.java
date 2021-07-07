@@ -8,9 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.koreait.myproject.command.board.InsertBoardCommand;
+import com.koreait.myproject.command.board.SelectBoardListCommand;
 import com.koreait.myproject.command.imgBoard.InsertImgBoardCommand;
-import com.koreait.myproject.command.imgBoard.SelectImgBoardByIdxCommand;
 import com.koreait.myproject.command.imgBoard.SelectImgBoardListCommand;
+import com.koreait.myproject.command.imgBoard.SelectImgBoardViewCommand;
+import com.koreait.myproject.command.imgBoard.UpdateImgBoardCommand;
 import com.koreait.myproject.command.member.DeleteMemberCommand;
 import com.koreait.myproject.command.member.EmailAuthCommand;
 import com.koreait.myproject.command.member.EmailCheckCommand;
@@ -120,15 +123,27 @@ public class BeanConfiguration {
 		return new SelectImgBoardListCommand();
 	}
 	@Bean
-	public SelectImgBoardByIdxCommand SelectImgBoardByIdxCommand() {
-		return new SelectImgBoardByIdxCommand();
+	public SelectImgBoardViewCommand SelectImgBoardViewCommand() {
+		return new SelectImgBoardViewCommand();
 	}
 	@Bean
 	public InsertImgBoardCommand insertImgBoardCommand() {
 		return new InsertImgBoardCommand();
 	}
+	@Bean
+	public UpdateImgBoardCommand UpdateImgBoardCommand() {
+		return new UpdateImgBoardCommand();
+	}
 	
-	
+	// 자유 게시판(Board)
+	@Bean
+	public SelectBoardListCommand selectBoardListCommand() {
+		return new SelectBoardListCommand();
+	}
+	@Bean
+	public InsertBoardCommand insertBoardCommand() {
+		return new InsertBoardCommand();
+	}
 	
 	
 	

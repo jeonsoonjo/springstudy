@@ -78,19 +78,23 @@ public class MemberController {
 		this.deleteMemberCommand = deleteMemberCommand;
 		this.findIdCommand = findIdCommand;
 		this.findPwCommand = findPwCommand;
-		
 	}
 	
 	@GetMapping(value= {"/", "index.do"})
 	public String index() {
 		return "index";
 	}
+	// myPage 단순이동
+	@GetMapping(value="myPage.do")
+	public String myPage() {
+		return "member/myPage";
+	}
 	// 로그인(login)
 	@PostMapping(value="login.do")
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		model.addAttribute("request", request);
 		loginCommand.execute(sqlSession, model);
-		return "member/myPage";		
+		return "redirect:myPage.do";		
 	}
 	// 로그아웃(logout)
 	@GetMapping(value="logout.do")
@@ -127,10 +131,10 @@ public class MemberController {
 	}
 	// 회원가입(join)
 	@PostMapping(value="join.do")
-	public String join(HttpServletRequest request, Model model) {
+	public void join(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("request", request);
+		model.addAttribute("response", response);
 		joinCommand.execute(sqlSession, model);
-		return "redirect:/";
 	}
 	// 현재 비밀번호 확인(presentPwCheck)
 	@ResponseBody
@@ -142,24 +146,24 @@ public class MemberController {
 	}
 	// 비밀번호 변경(updatePw)
 	@PostMapping(value="updatePw.do")
-	public String updatePw(HttpServletRequest request, Model model) {
+	public void updatePw(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("request", request);
+		model.addAttribute("response", response);
 		updatePwCommand.execute(sqlSession, model);
-		return "member/myPage";		
 	}
 	// 회원 정보 변경(이름, 전화번호, 주소)
 	@PostMapping(value="updateMember.do")
-	public String updateMember(HttpServletRequest request, Model model) {
+	public void updateMember(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("request", request);
+		model.addAttribute("response", response);
 		updateMemberCommand.execute(sqlSession, model);
-		return "member/myPage";		
 	}
 	// 회원탈퇴(deleteMember)
 	@GetMapping(value="deleteMember.do")
-	public String deleteMember(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		deleteMemberCommand.execute(sqlSession, model);
-		return "redirect:/";	
+	public void deleteMember(HttpSession session, HttpServletResponse response, Model model) {
+		model.addAttribute("session", session);
+		model.addAttribute("response", response);
+		deleteMemberCommand.execute(sqlSession, model);	
 	}
 	// findIdPage 단순이동
 	@GetMapping(value="findIdPage.do")
@@ -185,10 +189,10 @@ public class MemberController {
 	}
 	// 비밀번호 찾기&변경(changePw)
 	@PostMapping(value="changePw.do")
-	public String changePw(HttpServletRequest request, Model model) {
+	public void changePw(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("request", request);
+		model.addAttribute("response", response);
 		findPwCommand.execute(sqlSession, model);
-		return "redirect:/";
 	}
 	
 }

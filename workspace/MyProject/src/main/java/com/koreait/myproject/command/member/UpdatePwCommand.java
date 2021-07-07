@@ -1,9 +1,10 @@
 package com.koreait.myproject.command.member;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class UpdatePwCommand implements MemberCommand {
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		
 		String pw = request.getParameter("pw");
 		long no = Long.parseLong(request.getParameter("no"));
@@ -28,13 +30,23 @@ public class UpdatePwCommand implements MemberCommand {
 		memberDTO.setNo(no);
 		
 		MemberDAO memberDAO = sqlSession.getMapper(MemberDAO.class);
-		int count = memberDAO.updatePw(memberDTO);
-		if(count > 0) {
-			HttpSession session = request.getSession();
-			MemberDTO loginUser = (MemberDTO)session.getAttribute("loginUser");
-			if(loginUser != null) {
-				loginUser.setPw(pw);
+		int result = memberDAO.updatePw(memberDTO);
+		
+		try {
+			response.setContentType("text/html; charset=utf-8");
+			if (result > 0) {
+				response.getWriter().append("<script>");
+				response.getWriter().append("alert('비밀번호가 변경되었습니다. 변경된 비밀번호로 로그인하세요.');");
+				response.getWriter().append("location.href='index.do';");
+				response.getWriter().append("</script>");
+			} else {
+				response.getWriter().append("<script>");
+				response.getWriter().append("alert('비밀번호 변경에 실패했습니다.');");
+				response.getWriter().append("history.back();");
+				response.getWriter().append("</script>");
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}

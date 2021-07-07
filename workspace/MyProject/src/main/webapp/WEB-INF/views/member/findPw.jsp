@@ -34,7 +34,6 @@
 				});
 			});
 		}
-		
 		// 이메일 인증 : email_auth
 		function fn_email_auth(authCode) {
 			$('#email_auth_btn').click(function() {
@@ -52,7 +51,7 @@
 </head>
 <body>
 
-	<h1>비밀번호 찾기</h1>
+	<h3>비밀번호 찾기</h3>
 	
 	<form id="f">
 		가입 당시 이메일을 입력하세요.<br>

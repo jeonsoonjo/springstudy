@@ -34,7 +34,8 @@ create table imgboard
 	writer varchar2(50), -- 작성자(member_id) fk
 	title varchar2(2000) not null, -- 제목
 	content varchar2(4000), -- 내용
-	filename varchar2(300), -- 파일명
+	origin_filename varchar2(300), -- 원래 파일명
+	save_filename varchar2(300), -- 저장된 파일명
 	ip varchar2(20), -- 작성자 ip
 	hit number, -- 조회수
 	postdate date, -- 작성일
@@ -96,6 +97,6 @@ alter table member_log add constraint member_log_fk foreign key(id) references m
 alter table imgboard add constraint imgboard_member_fk foreign key(writer) references member(id); 
 alter table imgboard_reply add constraint imgboard_reply_imgboard_fk foreign key(imgboard_idx) references imgboard(idx);
 
-
+alter table imgboard drop constraint imgboard_member_fk;
 
 

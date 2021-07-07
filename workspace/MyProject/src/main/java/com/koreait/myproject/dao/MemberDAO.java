@@ -12,7 +12,7 @@ public interface MemberDAO {
 	public int join(MemberDTO memberDTO);
 	public int updatePw(MemberDTO memberDTO);
 	public int updateMember(MemberDTO memberDTO);
-	public int deleteMember(MemberDTO memberDTO);
+	public int deleteMember(long no);
 	public MemberDTO findId(String email);
 	public int changePw(MemberDTO memberDTO);
 	

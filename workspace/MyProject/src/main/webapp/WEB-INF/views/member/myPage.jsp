@@ -112,12 +112,22 @@
 </head>
 <body>
 	
+	<!-- 비로그인  -->
+	<c:if test="${loginUser == null}">
+		<script type="text/javascript">
+		
+			alert('아이디와 비밀번호를 확인해주세요');
+			history.back();
+		
+		</script>
+	</c:if>
+	
 	<c:if test="${loginUser != null}">
 		<!-- 메뉴 -->
 		<div class="menu2">
-			<input type="button" class="board2" value="회원정보">
+			<input type="button" class="board2" value="회원정보" onclick="location.href='myPage.do'">
 			<input type="button" class="board2" value="갤러리 게시판" onclick="location.href='selectImgBoardList.do'">
-			<input type="button" class="board2" value="자유 게시판">
+			<input type="button" class="board2" value="자유 게시판" onclick="location.href='selectBoardList.do'">
 			<input type="button" class="board2" value="로그아웃" onclick="location.href='logout.do'">
 			<input type="button" class="board2" value="회원탈퇴" id="delete_btn">
 		</div>
@@ -157,15 +167,6 @@
 			</form>
 		</div>
 		
-	</c:if>
-	<!--  유저가 없는경우  -->
-	<c:if test="${loginUser == null}">
-	<script type="text/javascript">
-	
-		alert('아이디와 비밀번호를 확인해주세요');
-		history.back();
-	
-	</script>
 	</c:if>
 	
 </body>
