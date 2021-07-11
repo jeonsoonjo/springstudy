@@ -193,7 +193,14 @@
     			<scope>test</scope>
 		</dependency>
 
-		
+	 11) annotation 디펜던시 추가(간혹 import 오류가 발생할 때, 어노테이션 디펜던시 추가하면 됨)
+		<!-- annotation -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency> 
+	
 5. pom.xml 최신화: maven update project 실행
 
 6. mapper.xml 준비: com.koreait.file.dao 패키지에 배치

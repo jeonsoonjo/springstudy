@@ -27,6 +27,14 @@
 	</properties>
 	
 	<dependencies>
+		<!-- BeanConfiguration.java -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2.2</version>
+		</dependency>
+	
 		<!-- Spring and Transactions -->
 		<dependency>
 			<groupId>org.springframework</groupId>
