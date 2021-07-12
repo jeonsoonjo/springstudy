@@ -53,7 +53,7 @@ public class BoardController {
 		return "board/insert";
 	}
 
-	@PostMapping(value = "insert.do") // postmapping으로 수정
+	@PostMapping(value = "insert.do") // PostMapping으로 수정
 	public void insert(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("request", request);
 		model.addAttribute("response", response);
