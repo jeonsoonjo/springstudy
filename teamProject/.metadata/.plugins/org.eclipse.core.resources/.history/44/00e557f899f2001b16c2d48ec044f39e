@@ -1,0 +1,5 @@
+package com.team.d.command.member;
+
+public class ReJoinCommand {
+
+}

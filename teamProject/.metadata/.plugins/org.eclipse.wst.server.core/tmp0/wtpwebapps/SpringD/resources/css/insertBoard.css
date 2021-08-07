@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.button {
+    display: block;
+    justify-content: left;
+}
+label {
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* 못생긴 기존 input 숨기기 */
+#chooseFile {
+    visibility: hidden;
+}
+
